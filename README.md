@@ -4,7 +4,7 @@
 
    IDEA导入项目，导入pom.xml
 
-2. 在本地建一个数据库psm
+2. 在本地建一个数据库psm，运行resources/sql/psm.sql
 
 3. 修改resources/application.yaml中的用户名和密码（设置成你的）
 
