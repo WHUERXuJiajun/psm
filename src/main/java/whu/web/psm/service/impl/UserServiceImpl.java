@@ -37,8 +37,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean login(String phone, String pwd) {
-		// TODO Auto-generated method stub
-		return false;
+		User user = userMapper.selectByPrimaryKey(phone);//使用电话号码获取实体
+		if(user==null)
+			//电话号码错误
+			return false;
+		if(!pwd.equals(user.getPwd()))
+			//密码错误
+			return false;
+		return true;
 	}
 
 }
