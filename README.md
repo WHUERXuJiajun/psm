@@ -32,7 +32,8 @@ src/main/resources/static：前端模块
 ### 前端环境测试：
 
 1. 运行PsmApplication.java
-2. 在浏览器中输入localhost:8080/html/index/index.html，查看网页
+2. 在浏览器中输入http://localhost:8080/html/index/index.html，查看网页
+3. 在浏览器中输入http://localhost:8080/swagger-ui.html#/，如果能显示swagger API界面，则API文档无误
 
 
 
