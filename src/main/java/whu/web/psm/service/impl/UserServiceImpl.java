@@ -47,4 +47,19 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Override
+	public User getUserByPhone(String phone) {
+		return userMapper.selectByPrimaryKey(phone);
+	}
+
+	
+	@Override
+	public boolean updateUser(User user) {
+		int row = userMapper.updateByExampleSelective(user, null);//被影响的行数
+		if(row==1)
+			return true;
+		else 
+			return false;
+	}
+
 }
