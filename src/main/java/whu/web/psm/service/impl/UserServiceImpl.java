@@ -1,5 +1,11 @@
 package whu.web.psm.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Service;
+
+import whu.web.psm.dao.UserMapper;
+import whu.web.psm.pojo.User;
 import whu.web.psm.service.UserService;
 
 /**
@@ -8,6 +14,31 @@ import whu.web.psm.service.UserService;
  * @author	   : xsy
  * @date	   : 2020年5月23日
  */
+@Service
 public class UserServiceImpl implements UserService {
+
+	@Autowired
+	UserMapper userMapper;
+	
+	@Override
+	public boolean register(String phone, String pwd) {
+		try {
+			User user = new User();
+			user.setPhone(phone);
+			user.setPwd(pwd);
+			user.setCredit(100.0);//信誉分默认100
+			userMapper.insert(user);
+			return true;
+		} catch (DuplicateKeyException e) {
+			//重复主键，电话号码则重复
+			return false;
+		}
+	}
+
+	@Override
+	public boolean login(String phone, String pwd) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
