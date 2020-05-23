@@ -1,6 +1,7 @@
 package whu.web.psm.service;
 
 import whu.web.psm.pojo.MissionTable;
+import whu.web.psm.pojo.ReceKey;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface ReceService {
 	 * @param mid
 	 * @return
 	 */
-	boolean insertRece(String phone, Integer mid);
+	boolean insertRece(ReceKey receKey);
 	
 	
 	/**

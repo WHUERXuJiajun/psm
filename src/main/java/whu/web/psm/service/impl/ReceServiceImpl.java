@@ -27,11 +27,8 @@ public class ReceServiceImpl implements ReceService {
 	MissionTableMapper missionTableMapper;
 	
 	@Override
-	public boolean insertRece(String phone, Integer mid) {
+	public boolean insertRece(ReceKey receKey) {
 		try {
-			ReceKey receKey = new ReceKey();
-			receKey.setMid(mid);
-			receKey.setPhone(phone);
 			receMapper.insert(receKey);
 			return true;
 		}catch (Exception e) {
