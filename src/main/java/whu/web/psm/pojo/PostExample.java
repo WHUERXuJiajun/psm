@@ -274,62 +274,52 @@ public class PostExample {
             return (Criteria) this;
         }
 
-        public Criteria andMidEqualTo(String value) {
+        public Criteria andMidEqualTo(Integer value) {
             addCriterion("mid =", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidNotEqualTo(String value) {
+        public Criteria andMidNotEqualTo(Integer value) {
             addCriterion("mid <>", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidGreaterThan(String value) {
+        public Criteria andMidGreaterThan(Integer value) {
             addCriterion("mid >", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidGreaterThanOrEqualTo(String value) {
+        public Criteria andMidGreaterThanOrEqualTo(Integer value) {
             addCriterion("mid >=", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidLessThan(String value) {
+        public Criteria andMidLessThan(Integer value) {
             addCriterion("mid <", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidLessThanOrEqualTo(String value) {
+        public Criteria andMidLessThanOrEqualTo(Integer value) {
             addCriterion("mid <=", value, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidLike(String value) {
-            addCriterion("mid like", value, "mid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMidNotLike(String value) {
-            addCriterion("mid not like", value, "mid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMidIn(List<String> values) {
+        public Criteria andMidIn(List<Integer> values) {
             addCriterion("mid in", values, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidNotIn(List<String> values) {
+        public Criteria andMidNotIn(List<Integer> values) {
             addCriterion("mid not in", values, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidBetween(String value1, String value2) {
+        public Criteria andMidBetween(Integer value1, Integer value2) {
             addCriterion("mid between", value1, value2, "mid");
             return (Criteria) this;
         }
 
-        public Criteria andMidNotBetween(String value1, String value2) {
+        public Criteria andMidNotBetween(Integer value1, Integer value2) {
             addCriterion("mid not between", value1, value2, "mid");
             return (Criteria) this;
         }

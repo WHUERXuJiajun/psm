@@ -192,16 +192,4 @@ public class User {
     public void setCredit(Double credit) {
         this.credit = credit;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "phone='" + phone + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", icon='" + icon + '\'' +
-                ", motto='" + motto + '\'' +
-                ", score=" + score +
-                ", credit=" + credit +
-                '}';
-    }
 }
