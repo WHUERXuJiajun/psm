@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import whu.web.psm.dao.UserMapper;
-import whu.web.psm.pojo.User;
 import whu.web.psm.service.UserService;
 
 /**

@@ -2,8 +2,6 @@ package whu.web.psm.service;
 
 import java.util.List;
 
-import whu.web.psm.pojo.Mission;
-
 /**
  * 
  * @description: “用户接受任务"服务模块接口
