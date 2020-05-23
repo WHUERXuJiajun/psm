@@ -1,5 +1,7 @@
 package whu.web.psm.service;
 
+import whu.web.psm.pojo.User;
+
 /**
  * 
  * @description: 用户服务模块接口

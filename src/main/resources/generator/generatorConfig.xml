@@ -32,7 +32,10 @@
         </javaClientGenerator>
 <!--        生成对应表及类名-->
                 <table tableName="user" domainObjectName="User"></table>
-                <table tableName="missionTable" domainObjectName="MissionTable"></table>
+                <table tableName="missiontable" domainObjectName="MissionTable">
+                    <columnOverride column="desc" javaType="java.lang.String" jdbcType="VARCHAR" />
+                    <columnOverride column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+                </table>
                 <table tableName="rece" domainObjectName="Rece"></table>
                 <table tableName="post" domainObjectName="Post"></table>
     </context>

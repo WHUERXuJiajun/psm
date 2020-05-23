@@ -1,10 +1,14 @@
 package whu.web.psm.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import whu.web.psm.dao.MissionTableMapper;
+import whu.web.psm.dao.ReceMapper;
+import whu.web.psm.pojo.MissionTable;
+import whu.web.psm.pojo.ReceKey;
 import whu.web.psm.service.ReceService;
 
 /**
@@ -18,9 +22,12 @@ public class ReceServiceImpl implements ReceService {
 
 	@Autowired
 	ReceMapper receMapper;
+
+	@Autowired
+	MissionTableMapper missionTableMapper;
 	
 	@Override
-	public boolean insertRece(String phone, String mid) {
+	public boolean insertRece(String phone, Integer mid) {
 		try {
 			ReceKey receKey = new ReceKey();
 			receKey.setMid(mid);
@@ -33,9 +40,14 @@ public class ReceServiceImpl implements ReceService {
 	}
 
 	@Override
-	public List<Mission> getMissionsByPhone(String phone) {
-		
-		return null;
+	public List<MissionTable> getMissionsByPhone(String phone) {
+		List<MissionTable> missionTables = new ArrayList<>();
+		//获取用户接收的任务id
+		List<Integer> mids = receMapper.getMidByPhone(phone);
+		for (Integer mid: mids) {
+			missionTables.add(missionTableMapper.selectByPrimaryKey(mid));
+		}
+		return missionTables;
 	}
 
 }
