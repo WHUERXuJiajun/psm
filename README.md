@@ -1,5 +1,18 @@
 ## psm — 大学生任务互助共享平台
 
+### 文件夹说明
+```
+src/main/java/whu/web/psm/controller：控制层
+src/main/java/whu/web/psm/service：服务层
+src/main/java/whu/web/psm/dao：数据库交互层
+src/main/java/whu/web/psm/ecxeption：异常处理模块
+src/main/java/whu/web/psm/config：配置模块
+src/main/java/whu/web/psm/util：常用工具模块
+src/main/resources/static：前端模块
+```
+
+
+
 ### 后台环境测试：
 
 1. 导入项目
