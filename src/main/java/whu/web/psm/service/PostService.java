@@ -1,0 +1,35 @@
+package whu.web.psm.service;
+
+import whu.web.psm.pojo.MissionTable;
+import whu.web.psm.pojo.PostKey;
+import whu.web.psm.pojo.ReceKey;
+
+import java.util.List;
+/**
+ *
+ * @description: “上传任务"服务模块接口
+ * @author	   : hzf
+ * @date	   : 2020年5月23日
+ */
+public interface PostService {
+    /**
+     *
+     * @description: 用户上传任务
+     * @param title
+     * @param description
+     * @param money
+     * @param label1
+     * @param label2
+     * @param label3
+     * @return
+     */
+    boolean insertMissionTable(String title,String description,String money,String label1,String label2,String label3);
+    /**
+     *
+     * @description: 上传任务到post表
+     * @param phone
+     * @param mid
+     * @return
+     */
+    boolean insertPost(String phone,Integer mid);
+}
