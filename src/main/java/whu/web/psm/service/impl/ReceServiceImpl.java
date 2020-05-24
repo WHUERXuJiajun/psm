@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import whu.web.psm.dao.MissionTableMapper;
 import whu.web.psm.dao.ReceMapper;
@@ -26,10 +27,18 @@ public class ReceServiceImpl implements ReceService {
 	@Autowired
 	MissionTableMapper missionTableMapper;
 	
+	@Transactional
 	@Override
 	public boolean insertRece(ReceKey receKey) {
 		try {
+			//插入用户-任务数据
 			receMapper.insert(receKey);
+			//获取任务
+			MissionTable missionTable = missionTableMapper.selectByPrimaryKey(receKey.getMid());
+			//任务state改为1（正在进行）
+			missionTable.setState(1);
+			//更新任务列表
+			missionTableMapper.updateByExampleSelective(missionTable, null);
 			return true;
 		}catch (Exception e) {
 			return false;
@@ -45,6 +54,24 @@ public class ReceServiceImpl implements ReceService {
 			missionTables.add(missionTableMapper.selectByPrimaryKey(mid));
 		}
 		return missionTables;
+	}
+
+	@Override
+	public boolean cancelMission(ReceKey receKey) {
+		try {
+			//删除用户-任务
+			receMapper.deleteByPrimaryKey(receKey);
+			//获取任务
+			MissionTable missionTable = missionTableMapper.selectByPrimaryKey(receKey.getMid());
+			//任务state改为01（正在进行）
+			missionTable.setState(0);
+			//更新任务列表
+			missionTableMapper.updateByExampleSelective(missionTable, null);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
 	}
 
 }

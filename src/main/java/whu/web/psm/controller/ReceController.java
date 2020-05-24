@@ -3,6 +3,7 @@ package whu.web.psm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,6 +44,18 @@ public class ReceController {
     )
     public List<MissionTable> acceptMission(@RequestParam String phone){
         return receService.getMissionsByPhone(phone);
+    }
+	
+	
+	
+	
+	@DeleteMapping
+	@ApiOperation(
+            value = "取消接收的任务",
+            notes = "取消接收的任务"
+    )
+    public boolean cancelMission(@RequestBody ReceKey receKey){
+        return receService.cancelMission(receKey);
     }
 	
 }

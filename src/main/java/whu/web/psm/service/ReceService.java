@@ -31,4 +31,12 @@ public interface ReceService {
 	 * @return
 	 */
 	List<MissionTable> getMissionsByPhone(String phone);
+	
+	
+	/**
+	 * 
+	 * @description: 取消接收的任务
+	 * @return
+	 */
+	boolean cancelMission(ReceKey receKey);
 }
