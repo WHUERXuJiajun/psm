@@ -20,6 +20,7 @@ $(function () {
             data: {"phone": username, "pwd": password},//请求需要发送的处理数据
             success: function (data) {
                 if (data == true) {
+                    alert("登陆成功！");
                     window.location.href = '../index/index.html';
                 } else {
                     alert("密码错误或用户不存在");
