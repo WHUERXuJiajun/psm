@@ -96,7 +96,7 @@
                 <div class="layui-col-md3">
                   <label class="layui-form-label">所属类别</label>
                   <div class="layui-input-block">
-                    <select lay-verify="required" name="class" lay-filter="column"> 
+                    <select lay-verify="required" name="class" lay-filter="column" id="label1">
                       <option></option> 
                       <option value="0">计算机类</option> 
                       <option value="99">文学类</option> 
@@ -150,7 +150,7 @@
                 <div class="layui-inline">
                   <label class="layui-form-label">悬赏飞吻</label>
                   <div class="layui-input-inline" style="width: 190px;">
-                    <select name="experience">
+                    <select name="experience" id="money">
                       <option value="20">20</option>
                       <option value="30">30</option>
                       <option value="50">50</option>
@@ -171,7 +171,7 @@
                 </div>
               </div>
               <div class="layui-form-item">
-                <button class="layui-btn" lay-filter="*" lay-submit>立即发布</button>
+                <button class="layui-btn" lay-filter="*" lay-submit id="confirm">立即发布</button>
               </div>
             </form>
           </div>
@@ -187,6 +187,9 @@
     欢迎您的加入
   </p>
 </div>
+
+<script src="../../json/jquery.min.js"></script>
+<script src="../../json/index/add.js"></script>
 
 <script src="../../res/layui/layui.js"></script>
 <script>
