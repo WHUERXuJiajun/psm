@@ -49,7 +49,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserByPhone(String phone) {
-		return userMapper.selectByPrimaryKey(phone);
+		User user = userMapper.selectByPrimaryKey(phone);
+		user.setPwd("");
+		return user;
 	}
 
 	
