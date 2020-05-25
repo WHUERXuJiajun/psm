@@ -19,13 +19,14 @@ $(function () {
             async: false,//当有返回值以后才会进行后面的js程序。
             data: {"phone": username, "pwd": password},//请求需要发送的处理数据
             success: function (data) {
-                if (data == "true") {
+                if (data == true) {
                     window.location.href = '../index/index.html';
                 } else {
                     alert("密码错误或用户不存在");
                 }
             }
         });
+        return false;
     });
 });
 

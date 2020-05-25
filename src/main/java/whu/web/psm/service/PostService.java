@@ -1,4 +1,10 @@
 package whu.web.psm.service;
+
+import whu.web.psm.pojo.MissionTable;
+import whu.web.psm.pojo.PostKey;
+import whu.web.psm.pojo.ReceKey;
+
+import java.util.List;
 /**
  *
  * @description: “上传任务"服务模块接口
@@ -15,9 +21,10 @@ public interface PostService {
      * @param label1
      * @param label2
      * @param label3
+     * @param phone
      * @return
      */
-    boolean insertMissionTable(String title,String description,String money,String label1,String label2,String label3);
+    boolean insertMissionTable(String title,String description,String money,String label1,String label2,String label3,String phone);
     /**
      *
      * @description: 上传任务到post表

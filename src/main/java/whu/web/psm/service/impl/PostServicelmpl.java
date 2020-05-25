@@ -1,14 +1,18 @@
 package whu.web.psm.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import whu.web.psm.dao.MissionTableMapper;
 import whu.web.psm.dao.PostMapper;
+import whu.web.psm.dao.ReceMapper;
 import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.pojo.PostKey;
 import whu.web.psm.service.PostService;
+import whu.web.psm.service.ReceService;
 /**
  *
  * @description: 上传任务模块接口实现
@@ -37,7 +41,7 @@ public class PostServicelmpl implements PostService {
         }
     }
     @Override
-    public boolean insertMissionTable(String title,String description,String money,String label1,String label2,String label3) {
+    public boolean insertMissionTable(String title,String description,String money,String label1,String label2,String label3,String phone) {
         try {
             MissionTable missionTable=new MissionTable();
             missionTable.setState(0);
@@ -48,7 +52,8 @@ public class PostServicelmpl implements PostService {
             missionTable.setLabel3(label3);
             Date date=new Date();
             missionTable.setPostTime(date);
-            missionTableMapper.insert(missionTable);
+            int mid=missionTableMapper.insert(missionTable);
+            insertPost(phone,mid);
             return true;
         }catch (Exception e) {
             return false;
