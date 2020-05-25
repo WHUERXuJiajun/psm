@@ -36,7 +36,7 @@
 
 <div class="fly-header layui-bg-black">
   <div class="layui-container">
-    <a class="fly-logo">
+    <a class="fly-logo" href="../index/index.html">
       <img src="../../res/images/logo.png" alt="layui">
     </a>
     
@@ -98,13 +98,92 @@
                   <div class="layui-input-block">
                     <select lay-verify="required" name="class" lay-filter="column" id="label1">
                       <option></option> 
-                      <option value="0">计算机类</option> 
-                      <option value="99">文学类</option> 
-                      <option value="100">游戏类</option> 
-                      <option value="101">数学类</option> 
-                      <option value="168">现实类</option> 
+                      <option value="0">IT/软件</option> 
+                      <option value="99">社团</option> 
+                      <option value="100">其他</option>
                     </select>
                   </div>
+                </div>
+                <div class="layui-col-md3">
+                  <label class="layui-form-label">截止日期</label>
+                  <div class="layui-input-block">
+                    <select lay-verify="required" name="class" lay-filter="column"> 
+                      <option></option> 
+                      <option value="0">2020年</option> 
+                      <option value="1">2021年</option> 
+                      <option value="2">2022年</option>
+                      <option value="3">2023年</option>
+                      <option value="4">2024年</option>
+                      <option value="5">2025年</option>
+                      <option value="6">2026年</option>
+                      <option value="7">2027年</option>
+                      <option value="8">2028年</option>
+                      <option value="9">2029年</option>
+                    </select>
+                  </div>
+                </div>
+                  
+                  
+                <div class="layui-col-md2">
+                  
+                  
+                    <select lay-verify="required" name="class" lay-filter="column"> 
+                      <option></option> 
+                      <option value="0">1月</option> 
+                      <option value="1">2月</option> 
+                      <option value="2">3月</option>
+                      <option value="3">4月</option>
+                      <option value="4">5月</option>
+                      <option value="5">6月</option>
+                      <option value="6">7月</option>
+                      <option value="7">8月</option>
+                      <option value="8">9月</option>
+                      <option value="9">10月</option>
+                      <option value="10">11月</option>
+                      <option value="11">12月</option>
+                    </select>
+                  
+                </div>
+                  
+                  
+                <div class="layui-col-md2">
+                  
+                  
+                    <select lay-verify="required" name="class" lay-filter="column"> 
+                      <option></option> 
+                      <option value="0">1日</option> 
+                      <option value="1">2日</option> 
+                      <option value="2">3日</option>
+                      <option value="3">4日</option>
+                      <option value="4">5日</option>
+                      <option value="5">6日</option>
+                      <option value="6">7日</option>
+                      <option value="7">8日</option>
+                      <option value="8">9日</option>
+                      <option value="9">10日</option>
+                      <option value="10">11日</option> 
+                      <option value="11">12日</option> 
+                      <option value="12">13日</option>
+                      <option value="13">14日</option>
+                      <option value="14">15日</option>
+                      <option value="15">16日</option>
+                      <option value="16">17日</option>
+                      <option value="17">18日</option>
+                      <option value="18">19日</option>
+                      <option value="19">20日</option>
+                      <option value="20">21日</option> 
+                      <option value="21">22日</option> 
+                      <option value="22">23日</option>
+                      <option value="23">24日</option>
+                      <option value="24">25日</option>
+                      <option value="25">26日</option>
+                      <option value="26">27日</option>
+                      <option value="27">28日</option>
+                      <option value="28">29日</option>
+                      <option value="29">30日</option>
+                      <option value="29">31日</option>
+                    </select>
+                  
                 </div>
                 <div class="layui-col-md9">
                   <label for="L_title" class="layui-form-label">标题</label>
@@ -148,7 +227,7 @@
               </div>
               <div class="layui-form-item">
                 <div class="layui-inline">
-                  <label class="layui-form-label">悬赏飞吻</label>
+                  <label class="layui-form-label">悬赏金额</label>
                   <div class="layui-input-inline" style="width: 190px;">
                     <select name="experience" id="money">
                       <option value="20">20</option>
@@ -158,17 +237,12 @@
                       <option value="80">80</option>
                     </select>
                   </div>
-                  <div class="layui-form-mid layui-word-aux">发表后无法更改飞吻</div>
+                  <div class="layui-form-mid layui-word-aux">发表后无法更改</div>
                 </div>
               </div>
               <div class="layui-form-item">
-                <label for="L_vercode" class="layui-form-label">人类验证</label>
-                <div class="layui-input-inline">
-                  <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid">
-                  <span style="color: #c00;">1+1=?</span>
-                </div>
+                
+                
               </div>
               <div class="layui-form-item">
                 <button class="layui-btn" lay-filter="*" lay-submit id="confirm">立即发布</button>
