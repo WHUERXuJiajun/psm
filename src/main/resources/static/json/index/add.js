@@ -29,6 +29,7 @@ $(function () {
                     alert("任务发布失败");
                 }
             }
+
         });
         return false;
     });
