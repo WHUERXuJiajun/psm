@@ -40,7 +40,13 @@ public class MissionTableServicelmpl implements MissionTableService {
     }
 
     @Override
-    public List<MissionTable> selectMissionByLabel(String label) {
-        return missionTableMapper.selectMissionByLabel(label);
+    public List<MissionTable> selectMissionByLabel(String label, Integer page, Integer size) {
+    	int offset = 0;
+        if(size<=0)
+            return null;
+        if (page > 0) {
+            offset = (page - 1) * size;
+        }
+    	return missionTableMapper.selectMissionByLabel(label, size, offset);
     }
 }
