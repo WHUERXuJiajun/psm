@@ -19,7 +19,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/post/post_mission",//请求程序页面
+            url: "/api/post/post_mission",//请求程序页面
             async: false,//当有返回值以后才会进行后面的js程序。
             dataType: "json",
             data: {"title": title, "description": description, "money":money, "label1":label1, "label2":label2, "label3":label3},//请求需要发送的处理数据

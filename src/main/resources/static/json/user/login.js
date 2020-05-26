@@ -15,16 +15,16 @@ $(document).ready(function () {
 
         $.ajax({
             type: "GET",
-            url: "/user/login",//请求程序页面
+            url: "/api/user/login",//请求程序页面
             async: false,//当有返回值以后才会进行后面的js程序。
             dataType: "json",
             data: {"phone": username, "pwd": password},//请求需要发送的处理数据
             success: function (data) {
                 if (data == true) {
                     alert("登陆成功！");
-                    window.location.href = '../index/index.html';
+                    window.location.href = 'index.html';
                 } else {
-                    alert("密码错误或用户不存在");
+                    alert(data);
                 }
             }
         });

@@ -3,6 +3,7 @@ package whu.web.psm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +19,14 @@ import whu.web.psm.pojo.ReceKey;
 import whu.web.psm.service.ReceService;
 
 @RestController
-@RequestMapping("/Rece")
+@RequestMapping("api/Rece")
 @Api(value = "ReceController",tags = "用户接收任务模块")
 public class ReceController {
 	
 	@Autowired
 	ReceService receService;
 	
+	@PreAuthorize("hasRole('user')")
 	@PostMapping(value = "/accept")
     @ApiOperation(
             value = "用户接受任务",
@@ -36,7 +38,7 @@ public class ReceController {
 	
 	
 	
-	
+	@PreAuthorize("hasRole('user')")
 	@GetMapping
     @ApiOperation(
             value = "根据用户的电话，获取用户接受的任务",
@@ -48,7 +50,7 @@ public class ReceController {
 	
 	
 	
-	
+	@PreAuthorize("hasRole('user')")
 	@DeleteMapping
 	@ApiOperation(
             value = "取消接收的任务",

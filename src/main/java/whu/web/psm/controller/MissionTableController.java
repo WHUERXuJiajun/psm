@@ -16,7 +16,7 @@ import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.service.MissionTableService;
 
 @RestController
-@RequestMapping("/MissionTable")
+@RequestMapping("api/MissionTable")
 @Api(value = "MissionTableController",tags = "任务列表模块")
 public class MissionTableController {
 

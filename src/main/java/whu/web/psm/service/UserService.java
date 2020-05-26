@@ -10,7 +10,10 @@ import whu.web.psm.pojo.User;
  */
 
 public interface UserService {
-	
+
+
+
+
 	/**
 	 * 
 	 * @description: 注册用户
@@ -26,7 +29,7 @@ public interface UserService {
 	 * @description: 登陆账户
 	 * @param phone
 	 * @param pwd
-	 * @return false--账号或密码错误; true--登陆成功
+	 * @return 
 	 */
 	boolean login(String phone, String pwd);
 	

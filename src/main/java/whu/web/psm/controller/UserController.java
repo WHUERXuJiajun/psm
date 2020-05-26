@@ -4,19 +4,22 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import whu.web.psm.pojo.User;
 import whu.web.psm.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("api/user")
 @Api(value = "UserController",tags = "用户模块")
 public class UserController {
 
     @Autowired
     UserService userService;
+
 
     @PostMapping(value = "/register")
     @ApiOperation(
@@ -32,6 +35,8 @@ public class UserController {
         return userService.register(phone,pwd);
     }
     
+    
+
     @GetMapping(value = "/login")
     @ApiOperation(
             value = "登录",
@@ -43,10 +48,11 @@ public class UserController {
     })
     public boolean login(@RequestParam("phone") String phone,
                             @RequestParam("pwd") String pwd){
-        return userService.login(phone,pwd);
+        return userService.login(phone, pwd);
     }
     
     
+
     @GetMapping
     @ApiOperation(
             value = "获取用户信息",
@@ -58,7 +64,7 @@ public class UserController {
     }
     
     
-    
+    @PreAuthorize("hasRole('user')")
     @PutMapping
     @ApiOperation(
             value = "更新",
