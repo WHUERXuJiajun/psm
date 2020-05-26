@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
     $("#confirm").click(function () {
         var title = $("#L_title").val();
         var description = $("#L_content").val();
@@ -21,6 +21,7 @@ $(function () {
             type: "POST",
             url: "/post/post_mission",//请求程序页面
             async: false,//当有返回值以后才会进行后面的js程序。
+            dataType: "json",
             data: {"title": title, "description": description, "money":money, "label1":label1, "label2":label2, "label3":label3},//请求需要发送的处理数据
             success: function (data) {
                 if (data == "true") {
@@ -28,10 +29,9 @@ $(function () {
                 } else {
                     alert("任务发布失败");
                 }
+
             }
         });
-
-
         return false;
     });
 });

@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
     $("#login").click(function () {
         var username = $("#L_email").val();
         var password = $("#L_pass").val();
@@ -17,6 +17,7 @@ $(function () {
             type: "GET",
             url: "/user/login",//请求程序页面
             async: false,//当有返回值以后才会进行后面的js程序。
+            dataType: "json",
             data: {"phone": username, "pwd": password},//请求需要发送的处理数据
             success: function (data) {
                 if (data == true) {
