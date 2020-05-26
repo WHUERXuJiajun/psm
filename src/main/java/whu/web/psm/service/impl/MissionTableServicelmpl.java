@@ -22,17 +22,14 @@ public class MissionTableServicelmpl implements MissionTableService {
     MissionTableMapper missionTableMapper;
 
     @Override
-    public List<MissionTable> getMissions_all(Integer page) {
-        List<MissionTable> missionTables = new ArrayList<>();
-        Integer mids=page*10;
-        while(mids<=mids+10) {
-            try {
-                missionTables.add(missionTableMapper.selectByPrimaryKey(mids));
-            }catch (Exception e) {
-            }
-            mids++;
+    public List<MissionTable> getMissions_all(Integer page, Integer size) {
+        int offset = 0;
+        if(size<=0)
+            return null;
+        if (page > 0) {
+            offset = (page - 1) * size;
         }
-        return missionTables;
+        return missionTableMapper.getMissionByPage(size,offset);
     }
 
     @Override
@@ -40,5 +37,10 @@ public class MissionTableServicelmpl implements MissionTableService {
         List<MissionTable> missionTable=new ArrayList<>();
             missionTable.add(missionTableMapper.selectByPrimaryKey(mid));
         return missionTable;
+    }
+
+    @Override
+    public List<MissionTable> selectMissionByLabel(String label) {
+        return missionTableMapper.selectMissionByLabel(label);
     }
 }

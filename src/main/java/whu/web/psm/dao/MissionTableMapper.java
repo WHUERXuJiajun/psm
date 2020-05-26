@@ -120,4 +120,22 @@ public interface MissionTableMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(MissionTable record);
+
+
+    /**
+     * 模糊查询，根据标签返回任务
+     *
+     * @param label -- 标签名
+     * @return 任务列表
+     */
+    List<MissionTable> selectMissionByLabel(String label);
+
+    /**
+     * 分页获取任务
+     *
+     * @param limit -- 每页大小
+     * @param offset -- 总偏移量
+     * @return
+     */
+    List<MissionTable> getMissionByPage(Integer limit, Integer offset);
 }

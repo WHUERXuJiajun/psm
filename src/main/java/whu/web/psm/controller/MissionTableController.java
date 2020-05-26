@@ -30,9 +30,11 @@ public class MissionTableController {
     )
     @ApiImplicitParams({
             @ApiImplicitParam(value = "页码", name = "page",paramType = "query",dataType = "integer"),
+            @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "integer")
     })
-    public List<MissionTable> acceptMission(@RequestParam("page") Integer page){
-        return missionTableService.getMissions_all(page);
+    public List<MissionTable> acceptMission(@RequestParam("page") Integer page,
+                                            @RequestParam("size") Integer size){
+        return missionTableService.getMissions_all(page,size);
     }
 
     @GetMapping(value="/getDetails")
@@ -46,5 +48,17 @@ public class MissionTableController {
     })
     public List<MissionTable> getDetails(@RequestParam("mid") Integer mid){
         return missionTableService.getDetails(mid);
+    }
+
+
+
+    @GetMapping(value="/getMissions_label")
+    @ApiOperation(
+            value = "根据标签获取任务",
+            notes = "根据标签获取任务"
+    )
+    @ApiImplicitParam(value = "标签", name = "label",paramType = "query",dataType = "String")
+    public List<MissionTable> getMissionByLabel(@RequestParam("label") String label){
+        return missionTableService.selectMissionByLabel(label);
     }
 }

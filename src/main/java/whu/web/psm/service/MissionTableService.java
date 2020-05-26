@@ -14,7 +14,7 @@ public interface MissionTableService {
      * @description: 获取对应页的任务
      * @return
      */
-    List<MissionTable> getMissions_all(Integer page);
+    List<MissionTable> getMissions_all(Integer page, Integer size);
 
     /**
      *
@@ -23,4 +23,14 @@ public interface MissionTableService {
      * @return
      */
     List<MissionTable> getDetails(Integer mid);
+
+
+    /**
+     * 模糊查询，根据标签返回任务
+     *
+     * @param label -- 标签名
+     * @return 任务列表
+     */
+    List<MissionTable> selectMissionByLabel(String label);
+
 }

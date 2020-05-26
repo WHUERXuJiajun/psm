@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
 			user.setPhone(phone);
 			user.setPwd(pwd);
 			user.setCredit(100.0);//信誉分默认100
+			user.setScore(0.0);//积分默认0
 			userMapper.insert(user);
 			return true;
 		} catch (DuplicateKeyException e) {

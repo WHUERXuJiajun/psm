@@ -1,5 +1,7 @@
 package whu.web.psm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class MissionTable {
@@ -25,6 +27,7 @@ public class MissionTable {
      *
      * @mbggenerated
      */
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date postTime;
 
     /**
@@ -33,6 +36,7 @@ public class MissionTable {
      *
      * @mbggenerated
      */
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date endTime;
 
     /**
