@@ -33,7 +33,7 @@ public class MissionTableController {
             @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "integer")
     })
     public List<MissionTable> acceptMission(@RequestParam("page") Integer page,
-                                            @RequestParam("size") Integer size){
+                                            @RequestParam(value = "size",defaultValue = "8") Integer size){
         return missionTableService.getMissions_all(page,size);
     }
 
@@ -54,11 +54,17 @@ public class MissionTableController {
 
     @GetMapping(value="/getMissions_label")
     @ApiOperation(
-            value = "根据标签获取任务",
-            notes = "根据标签获取任务"
+            value = "根据标签分页获取任务",
+            notes = "根据标签分页获取任务"
     )
-    @ApiImplicitParam(value = "标签", name = "label",paramType = "query",dataType = "String")
-    public List<MissionTable> getMissionByLabel(@RequestParam("label") String label){
-        return missionTableService.selectMissionByLabel(label);
+    @ApiImplicitParams({
+       @ApiImplicitParam(value = "标签", name = "label",paramType = "query",dataType = "String"),
+       @ApiImplicitParam(value = "页号", name = "page",paramType = "query",dataType = "Integer"),
+       @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "Integer")
+    })
+    public List<MissionTable> getMissionByLabel(@RequestParam("label") String label,
+									    		@RequestParam("page") Integer page,
+									            @RequestParam(value = "size",defaultValue = "8")Integer size){
+        return missionTableService.selectMissionByLabel(label, page, size);
     }
 }

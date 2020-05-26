@@ -26,11 +26,11 @@ public interface MissionTableService {
 
 
     /**
-     * 模糊查询，根据标签返回任务
+     * 根据标签返回任务
      *
      * @param label -- 标签名
      * @return 任务列表
      */
-    List<MissionTable> selectMissionByLabel(String label);
+    List<MissionTable> selectMissionByLabel(String label, Integer page, Integer size);
 
 }

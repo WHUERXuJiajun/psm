@@ -468,7 +468,9 @@
             axios.defaults.baseURL = 'http://localhost:8080/'
             axios.get("MissionTable/getMissions_label", {
               params: {
-                label:label
+                label:label,
+                page: 1,
+                size: 8
               }
             }).then(function (response) {
               self.missions = response.data; //此时还是字符串
