@@ -2,6 +2,7 @@ package whu.web.psm.controller;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,8 @@ import whu.web.psm.service.PostService;
 public class PostController {
     @Autowired
     PostService postService;
+
+    @PreAuthorize("hasRole('user')")
     @PostMapping(value = "/post_mission")
     @ApiOperation(
             value = "用户上传任务",

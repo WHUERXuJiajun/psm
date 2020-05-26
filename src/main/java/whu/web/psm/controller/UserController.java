@@ -40,13 +40,13 @@ public class UserController {
     @GetMapping(value = "/login")
     @ApiOperation(
             value = "登录",
-            notes = "输入电话和密码，返回boolean"
+            notes = "输入电话和密码，返回token"
     )
     @ApiImplicitParams({
             @ApiImplicitParam(value = "电话", name = "phone",paramType = "query",dataType = "String"),
             @ApiImplicitParam(value = "密码", name = "pwd",paramType = "query",dataType = "String"),
     })
-    public boolean login(@RequestParam("phone") String phone,
+    public String login(@RequestParam("phone") String phone,
                             @RequestParam("pwd") String pwd){
         return userService.login(phone, pwd);
     }
@@ -56,11 +56,11 @@ public class UserController {
     @GetMapping
     @ApiOperation(
             value = "获取用户信息",
-            notes = "输入电话，返回用户的信息"
+            notes = "输入token，返回用户的信息"
     )
     @ApiImplicitParam(value = "电话", name = "phone",paramType = "query",dataType = "String")
-    public User getUserByPhone(@RequestParam("phone") String phone){
-        return userService.getUserByPhone(phone);
+    public User getUserByPhone(@RequestParam("phone") String token){
+        return userService.getUserFromToken(token);
     }
     
     

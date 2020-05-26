@@ -1,9 +1,9 @@
 package whu.web.psm.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,12 +24,21 @@ import whu.web.psm.service.UserService;
  * @date	   : 2020年5月23日
  */
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserMapper userMapper;
 
-	
+	private Map<String, UserDetails> tokenMap = new HashMap<>();
+
+	@Cacheable("user")
+	public User getUserFromToken(String token) {
+		if(token == null) {
+			return null;
+		}
+		String phone = tokenMap.get(token).getPassword();
+		return userMapper.selectByPrimaryKey(phone);
+	}
 
 	@Override
 	public boolean register(String phone, String pwd) {
@@ -48,65 +57,34 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public boolean login(String phone, String pwd) {
+	public String login(String phone, String pwd) {
 		User user = userMapper.selectByPrimaryKey(phone);//使用电话号码获取实体
-		if(user==null)
-			//电话号码错误
-			return false;
-		if(!pwd.equals(user.getPwd()))
-			//密码错误
-			return false;
-		return true;
-	}
-
-	@Override
-	public User getUserByPhone(String phone) {
-		User user = userMapper.selectByPrimaryKey(phone);
-		user.setPwd("");
-		return user;
+		if(user.getPwd().equals(pwd)){
+			List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+			if(user.getPhone().equals("15387315836")) {
+				//赋予此账号管理员权限
+				grantedAuthorities.add(new SimpleGrantedAuthority("manager"));
+			}
+			grantedAuthorities.add(new SimpleGrantedAuthority("user"));
+			String token = UUID.randomUUID().toString();
+			UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getPhone(), user.getPwd(), grantedAuthorities);
+			tokenMap.put(token, userDetails);
+			return token;
+		}else {
+			return null;
+		}
 	}
 
 	
 	@Override
 	public boolean updateUser(User user) {
 		int row = userMapper.updateByExampleSelective(user, null);//被影响的行数
-		if(row==1)
-			return true;
-		else 
-			return false;
+		return row == 1;
 	}
-	
-	
-	/**
-     * 根据用户名获取认证用户信息
-     */
-    @Override
-    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
-        if(StringUtils.isEmpty(phone)) {
-            throw new UsernameNotFoundException("UserDetailsService没有接收到用户账号");
-        } else {
-            /**
-             * 根据用户名查找用户信息
-             */
-            User user = userMapper.selectByPrimaryKey(phone);
-            if(user == null) {
-                throw new UsernameNotFoundException(String.format("用户'%s'不存在", phone));
-            }
-            List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-            if(user.getPhone().equals("15387315836")) {
-                //赋予此账号管理员权限
-                grantedAuthorities.add(new SimpleGrantedAuthority("manager"));
-                grantedAuthorities.add(new SimpleGrantedAuthority("user"));
-            }
-            else {
-            	//赋予此账号普通用户权限
-            	grantedAuthorities.add(new SimpleGrantedAuthority("user"));
-			}
-            /**
-             * 创建一个用于认证的用户对象并返回，包括：用户名，密码，角色
-             */
-            return new org.springframework.security.core.userdetails.User(user.getPhone(), user.getPwd(), grantedAuthorities);
-        }
-    }
+
+	public void logout(String token) {
+		tokenMap.remove(token);
+	}
+
 
 }

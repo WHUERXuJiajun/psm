@@ -1,5 +1,6 @@
 package whu.web.psm.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import whu.web.psm.pojo.User;
 
 /**
@@ -12,7 +13,13 @@ import whu.web.psm.pojo.User;
 public interface UserService {
 
 
-
+	/**
+	 * 根据token获取用户信息
+	 *
+	 * @param token
+	 * @return
+	 */
+	User getUserFromToken(String token);
 
 	/**
 	 * 
@@ -29,18 +36,9 @@ public interface UserService {
 	 * @description: 登陆账户
 	 * @param phone
 	 * @param pwd
-	 * @return 
+	 * @return 用户token
 	 */
-	boolean login(String phone, String pwd);
-	
-		
-	/**
-	 * 
-	 * @description: 根据电话号码获取用户信息
-	 * @param phone
-	 * @return 用户信息
-	 */
-	User getUserByPhone(String phone);
+	String login(String phone, String pwd);
 	
 	
 	/**
@@ -50,4 +48,10 @@ public interface UserService {
 	 * @return
 	 */
 	boolean updateUser(User user);
+
+
+	/**
+	 * 退出登录
+	 */
+	void logout(String token);
 }
