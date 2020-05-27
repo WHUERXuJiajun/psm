@@ -93,7 +93,7 @@ public class UserController {
     
     
     @PreAuthorize("hasRole('user')")
-    @DeleteMapping
+    @DeleteMapping(value = "/logout")
     @ApiOperation(
             value = "退出登录",
             notes = "输入token，退出登录"
