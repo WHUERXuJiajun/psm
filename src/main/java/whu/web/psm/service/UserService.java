@@ -1,6 +1,5 @@
 package whu.web.psm.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import whu.web.psm.pojo.User;
 
 /**

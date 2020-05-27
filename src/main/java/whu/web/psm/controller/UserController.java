@@ -67,7 +67,7 @@ public class UserController {
     @PreAuthorize("hasRole('user')")
     @PutMapping
     @ApiOperation(
-            value = "更新",
+            value = "更新用户",
             notes = "输入用户，根据用户id更新用户信息"
     )
     @ApiImplicitParams({
@@ -77,5 +77,17 @@ public class UserController {
     public boolean updateUser(@RequestBody User user){
         return userService.updateUser(user);
     }
+    
+    
+    @DeleteMapping
+    @ApiOperation(
+            value = "退出登录",
+            notes = "输入token，退出登录"
+    )
+    @ApiImplicitParam(value = "token", name = "token",paramType = "query",dataType = "String")
+    public void updateUser(@RequestParam String token){
+        userService.logout(token);
+    }
+
     
 }

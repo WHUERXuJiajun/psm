@@ -3,7 +3,6 @@
  */
 package whu.web.psm.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -37,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/html/index/**","/html/common/**","/html/other/**",
-                        "/json/**","/res/**","/views/**").permitAll()
+                        "/json/**","/res/**","/views/**","/swagger-ui.html").permitAll()
                 .antMatchers("/html/user/**").access("hasRole('manager') or hasRole('user')")
                 .antMatchers("/html/admin/**").access("hasRole('manager')")
                 .anyRequest()
