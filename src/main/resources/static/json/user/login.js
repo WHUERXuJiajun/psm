@@ -17,15 +17,16 @@ $(document).ready(function () {
             type: "GET",
             url: "/api/user/login",//请求程序页面
             async: false,//当有返回值以后才会进行后面的js程序。
-            dataType: "json",
+            dataType: "text",
             data: {"phone": username, "pwd": password},//请求需要发送的处理数据
             success: function (data) {
-                if (data == true) {
-                    alert("登陆成功！");
-                    window.location.href = 'index.html';
-                } else {
-                    alert(data);
-                }
+                document.cookie = data;
+                alert('登陆成功！');
+                window.location.href = "index.html";
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                /*错误信息处理*/
+            	 alert('登陆失败！');
             }
         });
         return false;

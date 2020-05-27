@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -29,18 +30,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http
+//        	.formLogin()
+//        	.loginPage("/html/index/login.html")
+//        	.and()
+//            .rememberMe()
+//                .tokenValiditySeconds(1800)
+//                .and()
+//            .authorizeRequests()
+//                .antMatchers("/").permitAll()
+////                .antMatchers("/api/**").permitAll()
+////                .antMatchers("/html/user/**").access("hasRole('manager') or hasRole('user')")
+////                .antMatchers("/html/admin/**").access("hasRole('manager')")
+//                .anyRequest()
+//                .authenticated();
         http
-            .rememberMe()
-                .tokenValiditySeconds(1800)
-                .and()
-            .authorizeRequests()
-                .antMatchers("/api/**").permitAll()
-                .antMatchers("/html/index/**","/html/common/**","/html/other/**",
-                        "/json/**","/res/**","/views/**","/swagger-ui.html").permitAll()
-                .antMatchers("/html/user/**").access("hasRole('manager') or hasRole('user')")
-                .antMatchers("/html/admin/**").access("hasRole('manager')")
-                .anyRequest()
-                .authenticated();
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                //.antMatchers("/academy/","/init/","/lesson/","/message/","/school/","/sl/","/student/","/teacher/","/tl/").hasRole("manager")
+                .anyRequest().permitAll();
     }
 
     /**
