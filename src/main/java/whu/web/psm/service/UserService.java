@@ -52,6 +52,19 @@ public interface UserService {
 
 
 	/**
+	 * 
+	 * @description: 更新密码
+	 * @param phone -- 账户电话
+	 * @param oldPwd -- 旧密码
+	 * @param newPwd -- 新密码
+	 * @return
+	 */
+	boolean updatePwd(String phone, String oldPwd, String newPwd);
+	
+	
+	
+	
+	/**
 	 * 退出登录
 	 */
 	void logout(String token);

@@ -72,13 +72,24 @@ public class UserController {
             value = "更新用户",
             notes = "输入用户，根据用户id更新用户信息"
     )
-    @ApiImplicitParams({
-            @ApiImplicitParam(value = "电话", name = "phone",paramType = "query",dataType = "String"),
-            @ApiImplicitParam(value = "密码", name = "pwd",paramType = "query",dataType = "String"),
-    })
     public boolean updateUser(@RequestBody User user){
         return userService.updateUser(user);
     }
+    
+    
+    
+    @PreAuthorize("hasRole('user')")
+    @PutMapping(value = "/updatePwd")
+    @ApiOperation(
+            value = "更新用户密码",
+            notes = "输入phone，旧密码，新密码，更新密码"
+    )
+    public boolean updatePwd(@RequestParam String phone,
+				    		@RequestParam String oldPwd,
+				    		@RequestParam String newPwd){
+        return userService.updatePwd(phone, oldPwd, newPwd);
+    }
+    
     
     
     @PreAuthorize("hasRole('user')")
@@ -94,7 +105,7 @@ public class UserController {
     
     
     
-    @GetMapping(value = "rank")
+    @GetMapping(value = "/rank")
     @ApiOperation(
             value = "查询前num个分数最高的用户",
             notes = "输入数量num，查询前num个分数最高的用户"

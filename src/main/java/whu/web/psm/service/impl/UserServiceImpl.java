@@ -87,5 +87,19 @@ public class UserServiceImpl implements UserService{
 		return userMapper.selectTopByScore(num);
 	}
 
+	@Override
+	public boolean updatePwd(String phone, String oldPwd, String newPwd) {
+		User user = userMapper.selectByPrimaryKey(phone);//使用电话号码获取实体
+		if(user.getPwd().equals(oldPwd)){
+			//密码正确，更新密码
+			user.setPwd(newPwd);
+			userMapper.updateByExample(user, null);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 
 }
