@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -79,6 +81,7 @@ public class UserController {
     }
     
     
+    @PreAuthorize("hasRole('user')")
     @DeleteMapping
     @ApiOperation(
             value = "退出登录",
@@ -88,6 +91,17 @@ public class UserController {
     public void updateUser(@RequestParam String token){
         userService.logout(token);
     }
-
+    
+    
+    
+    @GetMapping(value = "rank")
+    @ApiOperation(
+            value = "查询前num个分数最高的用户",
+            notes = "输入数量num，查询前num个分数最高的用户"
+    )
+    @ApiImplicitParam(value = "num", name = "num",paramType = "query",dataType = "Integer")
+    public List<User> selectTopByScore(@RequestParam Integer num){
+        return userService.selectTopByScore(num);
+    }
     
 }

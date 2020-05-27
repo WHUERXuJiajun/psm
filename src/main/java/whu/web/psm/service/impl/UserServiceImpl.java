@@ -82,5 +82,10 @@ public class UserServiceImpl implements UserService{
 		tokenMap.remove(token);
 	}
 
+	@Override
+	public List<User> selectTopByScore(Integer num) {
+		return userMapper.selectTopByScore(num);
+	}
+
 
 }

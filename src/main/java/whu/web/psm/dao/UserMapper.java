@@ -96,5 +96,14 @@ public interface UserMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(User record);
+    
+    
+    /**
+     * 
+     * @description: 查询前num个分数最高的用户
+     * @param num -- 前num个
+     * @return
+     */
+    List<User> selectTopByScore(Integer num);
 
 }

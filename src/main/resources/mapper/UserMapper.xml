@@ -283,4 +283,12 @@
       credit = #{credit,jdbcType=DOUBLE}
     where phone = #{phone,jdbcType=VARCHAR}
   </update>
+  
+   <select id="selectTopByScore" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    order by 'score' DESC
+    limit #{num,jdbcType=INTEGER}
+  </select>
 </mapper>
