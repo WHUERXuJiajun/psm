@@ -5,6 +5,12 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      #更新或创建数据库表结构
+      ddl-auto: update
+    #输出执行sql
+    show-sql: true
 mybatis:
   typeAliasesPackage: whu.web.psm.*.pojo
   mapperLocations: classpath*:mapper/**/*.xml
