@@ -6,6 +6,9 @@ $(document).ready(function () {
         var label1 = $("#label1").val();
         var label2 = $("#label2").val();
         var label3 = $("#label3").val();
+        var token = document.cookie.split(";")[0];
+        var phone = document.cookie.split(";")[1];
+
         if (!title) {
             alert("任务名称必填!");
             $("#L_title").focus();//获取焦点
@@ -18,11 +21,14 @@ $(document).ready(function () {
         }
 
         $.ajax({
+            header:{
+                'Authorization':token//此处放置请求到的用户token
+            },
             type: "POST",
             url: "/api/post/post_mission",//请求程序页面
             async: false,//当有返回值以后才会进行后面的js程序。
             dataType: "json",
-            data: {"title": title, "description": description, "money":money, "label1":label1, "label2":label2, "label3":label3},//请求需要发送的处理数据
+            data: {"phone":phone,"title": title, "description": description, "money":money, "label1":label1, "label2":label2, "label3":label3},//请求需要发送的处理数据
             success: function (data) {
                 if (data == "true") {
                     alert("任务发布成功");
