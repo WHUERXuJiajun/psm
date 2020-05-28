@@ -63,8 +63,8 @@ public class ReceServiceImpl implements ReceService {
 			receMapper.deleteByPrimaryKey(receKey);
 			//获取任务
 			MissionTable missionTable = missionTableMapper.selectByPrimaryKey(receKey.getMid());
-			//任务state改为1（正在进行）
-			missionTable.setState(1);
+			//任务state改为0
+			missionTable.setState(01);
 			//更新任务列表
 			missionTableMapper.updateByExampleSelective(missionTable, null);
 			return true;

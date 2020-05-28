@@ -118,7 +118,7 @@ public class UserController {
     }
 
 
-
+    @PreAuthorize("hasRole('user')")
     @PostMapping(value = "/uploadIcon", headers = "content-type=multipart/form-data")
     @ApiOperation(
             value = "上传头像",
