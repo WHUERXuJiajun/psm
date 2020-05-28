@@ -21,4 +21,11 @@ public interface CollectionService {
      * @param collection -- 收藏
      */
     void CollectMission(Collection collection);
+
+    /**
+     * 删除收藏
+     *
+     * @param collection -- 收藏
+     */
+    void deleteCollection(Collection collection);
 }

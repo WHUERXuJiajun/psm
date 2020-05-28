@@ -39,5 +39,10 @@ public class CollectionServiceImpl implements CollectionService {
         collectionMapper.save(collection);
     }
 
+    @Override
+    public void deleteCollection(Collection collection) {
+        collectionMapper.delete(collection);
+    }
+
 
 }

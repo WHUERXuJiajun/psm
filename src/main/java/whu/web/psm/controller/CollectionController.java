@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import whu.web.psm.pojo.Collection;
-import whu.web.psm.pojo.Comment;
 import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.service.CollectionService;
 
@@ -34,6 +33,16 @@ public class CollectionController {
     )
     void collectMission(@RequestBody Collection collection) {
         collectionService.CollectMission(collection);
+    }
+
+
+    @DeleteMapping
+    @ApiOperation(
+            value = "取消收藏",
+            notes = "取消收藏"
+    )
+    void deleteCollection(@RequestBody Collection collection) {
+        collectionService.deleteCollection(collection);
     }
 
 }
