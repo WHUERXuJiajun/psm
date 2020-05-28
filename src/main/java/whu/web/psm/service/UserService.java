@@ -1,7 +1,9 @@
 package whu.web.psm.service;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
 import whu.web.psm.pojo.User;
 
 /**
@@ -78,4 +80,13 @@ public interface UserService {
      * @return
      */
 	List<User> selectTopByScore(Integer num);
+
+
+	/**
+	 * 用户上传头像
+	 *
+	 * @param icon -- 用户头像
+	 * @param phone -- 用户电话
+	 */
+	boolean uploadIcon(MultipartFile icon, String phone) throws IOException;
 }

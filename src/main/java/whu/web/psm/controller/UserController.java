@@ -5,12 +5,14 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.multipart.MultipartFile;
 import whu.web.psm.pojo.User;
 import whu.web.psm.service.UserService;
 
@@ -46,15 +48,15 @@ public class UserController {
     )
     @ApiImplicitParams({
             @ApiImplicitParam(value = "电话", name = "phone",paramType = "query",dataType = "String"),
-            @ApiImplicitParam(value = "密码", name = "pwd",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(value = "密码", name = "pwd",paramType = "query",dataType = "String")
     })
     public String login(@RequestParam("phone") String phone,
                             @RequestParam("pwd") String pwd){
         return userService.login(phone, pwd);
     }
-    
-    
 
+
+    @PreAuthorize("hasRole('user')")
     @GetMapping
     @ApiOperation(
             value = "获取用户信息",
@@ -113,6 +115,21 @@ public class UserController {
     @ApiImplicitParam(value = "num", name = "num",paramType = "query",dataType = "Integer")
     public List<User> selectTopByScore(@RequestParam Integer num){
         return userService.selectTopByScore(num);
+    }
+
+
+
+    @PostMapping(value = "/uploadIcon", headers = "content-type=multipart/form-data")
+    @ApiOperation(
+            value = "上传头像",
+            notes = "上传头像"
+    )
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "电话", name = "phone",paramType = "query",dataType = "String",required = true)
+    })
+    public boolean uploadIcon(@RequestParam(value = "icon") MultipartFile icon,
+                           @RequestParam(value = "phone") String phone) throws IOException {
+        return userService.uploadIcon(icon, phone);
     }
     
 }

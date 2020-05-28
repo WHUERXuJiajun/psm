@@ -11,6 +11,13 @@ spring:
       ddl-auto: update
     #输出执行sql
     show-sql: true
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+project:
+  upload:
+    path: C:\temp\
 mybatis:
   typeAliasesPackage: whu.web.psm.*.pojo
   mapperLocations: classpath*:mapper/**/*.xml
