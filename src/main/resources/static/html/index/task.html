@@ -124,7 +124,7 @@
                         </a>
                         <h2>
                             <a class="layui-badge">任务</a>
-                            <a href="detail.html">{{mission.title}}</a>
+                            <a v-on:click="goDetail(mission)">{{mission.title}}</a>
                         </h2>
                         <div class="fly-list-info">
                             <a href="../user/home.html" link>
@@ -475,7 +475,10 @@
             }).then(function (response) {
               self.missions = response.data; //此时还是字符串
             })
-          }
+          },
+            goDetail:function (mission) {
+                window.location.href = "detail.html?mid="+mission.mid;
+            }
         }
     })
 </script>
