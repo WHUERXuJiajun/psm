@@ -1,10 +1,9 @@
 $(document).ready(function () {
-    var token = document.cookie.split(";")[0];//取得Token
-    var phone = document.cookie.split(";")[1];//取得phone
+    var token =window.localStorage.getItem('token');
 
     //退出登录
     $.ajax({
-        header:{
+        headers:{
             'Authorization':token//此处放置请求到的用户token
         },
         type: "DELETE",

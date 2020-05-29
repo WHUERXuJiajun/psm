@@ -30,7 +30,7 @@ $(document).ready(function () {
         let month = $("#month").val();
         let day = $("#day").val();
         let end_time = new Date(year+"/"+month+"/"+day);
-        var token = window.localStorage.getItem('token');
+        let token = window.localStorage.getItem('token');
         //var phone = document.cookie.split(";")[1];
         let phone = getUser();
         if (!title) {

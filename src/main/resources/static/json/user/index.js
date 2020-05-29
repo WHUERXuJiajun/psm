@@ -3,7 +3,7 @@ $(document).ready(function () {
     var phone = document.cookie.split(";")[1];
     //已发布
     $.ajax({
-        header:{
+        headers:{
             'Authorization':token
         },
         type: "GET",
