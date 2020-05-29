@@ -5,6 +5,7 @@ import java.util.List;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,7 @@ public class MissionTableController {
             @ApiImplicitParam(value = "页码", name = "page",paramType = "query",dataType = "integer"),
             @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "integer")
     })
-    public List<MissionTable> acceptMission(@RequestParam("page") Integer page,
+    public List<MissionTable> acceptMission(@RequestParam(value = "page",defaultValue = "1") Integer page,
                                             @RequestParam(value = "size",defaultValue = "8") Integer size){
         return missionTableService.getMissions_all(page,size);
     }
@@ -63,8 +64,25 @@ public class MissionTableController {
        @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "Integer")
     })
     public List<MissionTable> getMissionByLabel(@RequestParam("label") String label,
-									    		@RequestParam("page") Integer page,
+									    		@RequestParam(value = "page",defaultValue = "1") Integer page,
 									            @RequestParam(value = "size",defaultValue = "8")Integer size){
         return missionTableService.selectMissionByLabel(label, page, size);
+    }
+
+
+    @GetMapping(value="/getMissions_key")
+    @ApiOperation(
+            value = "根据关键词分页获取任务",
+            notes = "根据关键词分页获取任务"
+    )
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "关键词", name = "key",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(value = "页号", name = "page",paramType = "query",dataType = "Integer"),
+            @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "Integer")
+    })
+    public Page<MissionTable> getMissionByKey(@RequestParam("key") String key,
+                                                @RequestParam(value = "page",defaultValue = "1") Integer page,
+                                                @RequestParam(value = "size",defaultValue = "8")Integer size){
+        return missionTableService.selectMissionByKey(key,page,size);
     }
 }

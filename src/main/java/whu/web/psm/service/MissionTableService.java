@@ -1,5 +1,6 @@
 package whu.web.psm.service;
 
+import org.springframework.data.domain.Page;
 import whu.web.psm.pojo.MissionTable;
 import java.util.List;
 /**
@@ -32,5 +33,15 @@ public interface MissionTableService {
      * @return 任务列表
      */
     List<MissionTable> selectMissionByLabel(String label, Integer page, Integer size);
+
+
+    /**
+     * 根据关键词返回查找的任务
+     *
+     * @param key -- 关键词
+     * @return
+     */
+    Page<MissionTable> selectMissionByKey(String key, Integer page, Integer size);
+
 
 }

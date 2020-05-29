@@ -3,8 +3,12 @@ package whu.web.psm.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import whu.web.psm.dao.MissionTableElasticSearchMapper;
 import whu.web.psm.dao.MissionTableMapper;
 import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.service.MissionTableService;
@@ -20,6 +24,9 @@ public class MissionTableServicelmpl implements MissionTableService {
 
     @Autowired
     MissionTableMapper missionTableMapper;
+
+    @Autowired
+    MissionTableElasticSearchMapper missionTableElasticSearchMapper;
 
     @Override
     public List<MissionTable> getMissions_all(Integer page, Integer size) {
@@ -48,5 +55,11 @@ public class MissionTableServicelmpl implements MissionTableService {
             offset = (page - 1) * size;
         }
     	return missionTableMapper.selectMissionByLabel(label, size, offset);
+    }
+
+    @Override
+    public Page<MissionTable> selectMissionByKey(String key, Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return missionTableElasticSearchMapper.findByTitleOrDescriptionLike(key, key, pageable);
     }
 }
