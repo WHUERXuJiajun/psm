@@ -1,4 +1,22 @@
 $(document).ready(function () {
+
+    function getUser(){
+        let token = document.cookie.split(";")[0];
+        $.ajax({
+            type: "GET",
+            url: "/api/user",//请求程序页面
+            async: false,//当有返回值以后才会进行后面的js程序。
+            dataType: "text",
+            headers:{
+                'Authorization':token//此处放置请求到的用户token
+            },
+            success: function (data) {
+                return data;
+            }
+        });
+    }
+
+
     $("#confirm").click(function () {
         var title = $("#L_title").val();
         var description = $("#L_content").val();
@@ -7,8 +25,8 @@ $(document).ready(function () {
         var label2 = $("#label2").val();
         var label3 = $("#label3").val();
         var token = document.cookie.split(";")[0];
-        var phone = document.cookie.split(";")[1];
-
+        //var phone = document.cookie.split(";")[1];
+        let phone = getUser();
         if (!title) {
             alert("任务名称必填!");
             $("#L_title").focus();//获取焦点
@@ -21,7 +39,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            header:{
+            headers:{
                 'Authorization':token//此处放置请求到的用户token
             },
             type: "POST",

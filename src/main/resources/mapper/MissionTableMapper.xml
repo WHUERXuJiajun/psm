@@ -184,7 +184,7 @@
     values (#{mid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{postTime,jdbcType=TIMESTAMP}, 
       #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}, 
       #{label1,jdbcType=VARCHAR}, #{label2,jdbcType=VARCHAR}, #{label3,jdbcType=VARCHAR}, 
-      #{comment,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
+      #{comment,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="whu.web.psm.pojo.MissionTable">
     <!--
@@ -311,7 +311,7 @@
         comment = #{record.comment,jdbcType=VARCHAR},
       </if>
       <if test="record.description != null">
-        description = #{record.description,jdbcType=LONGVARCHAR},
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">

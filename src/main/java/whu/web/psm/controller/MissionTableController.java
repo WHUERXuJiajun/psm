@@ -85,4 +85,87 @@ public class MissionTableController {
                                                 @RequestParam(value = "size",defaultValue = "8")Integer size){
         return missionTableService.selectMissionByKey(key,page,size);
     }
+
+    @GetMapping(value="/mission_cancel")
+    @ApiOperation(
+            value = "撤销任务",
+            notes = "根据mid删除任务"
+    )
+    @ApiImplicitParams({
+
+            @ApiImplicitParam(value = "任务id", name = "mid",paramType = "query",dataType = "integer"),
+
+    })
+    public Boolean mission_cancel(@RequestParam("mid") Integer mid){
+        return missionTableService.mission_cancel(mid);
+    }
+
+    @GetMapping(value="/mission_update")
+    @ApiOperation(
+            value = "更改任务详情",
+            notes = "根据mid等更改任务详情"
+    )
+    @ApiImplicitParams({
+
+            @ApiImplicitParam(value = "任务id", name = "mid",paramType = "query",dataType = "integer"),
+            @ApiImplicitParam(value = "任务标题", name = "title",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(value = "任务描述", name = "description",paramType = "query",dataType = "String"),
+            @ApiImplicitParam(value = "酬金", name = "money",paramType = "query",dataType = "double"),
+            @ApiImplicitParam(value = "标签1", name = "label1",paramType = "query",dataType = "string"),
+            @ApiImplicitParam(value = "标签1", name = "label2",paramType = "query",dataType = "string"),
+            @ApiImplicitParam(value = "标签2", name = "label3",paramType = "query",dataType = "string"),
+            @ApiImplicitParam(value = "电话", name = "phone",paramType = "query",dataType = "string"),
+    })
+    public Boolean mission_update(@RequestParam("mid") Integer mid,
+                                  @RequestParam("title") String title,
+                                  @RequestParam("description") String description,
+                                  @RequestParam("money") double money,
+                                  @RequestParam("label1") String label1,
+                                  @RequestParam("label2") String label2,
+                                  @RequestParam("label3") String label3,
+                                  @RequestParam("phone") String phone){
+        return missionTableService.mission_update(mid,title,description,money,label1,label2,label3,phone);
+    }
+
+    @GetMapping(value="/orderMissonsByTime")
+    @ApiOperation(
+            value = "根据发布时间排序",
+            notes = "获取任务，并根据时间排序"
+    )
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "页号", name = "page",paramType = "query",dataType = "Integer"),
+            @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "Integer")
+    })
+    public List<MissionTable> orderMissionsByTime(
+            @RequestParam(value = "page",defaultValue = "1") Integer page,
+            @RequestParam(value = "size",defaultValue = "8")Integer size){
+        return missionTableService.selectMissionByTime(page,size);
+    }
+
+    @GetMapping(value="/orderMissionsByMoney")
+    @ApiOperation(
+            value = "根据酬金排序",
+            notes = "获取任务，并根据酬金排序"
+    )
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "页号", name = "page",paramType = "query",dataType = "Integer"),
+            @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "Integer")
+    })
+    public List<MissionTable> orderMissionsByMoney(
+            @RequestParam(value = "page",defaultValue = "1") Integer page,
+            @RequestParam(value = "size",defaultValue = "8")Integer size){
+        return missionTableService.selectMissionByMoney(page,size);
+    }
+
+
+    @GetMapping(value="/orderMissionsByDdl")
+    @ApiOperation(
+            value = "根据截止时间排序",
+            notes = "获取任务，并根据时间排序"
+    )
+    public List<MissionTable> orderMissionsByDdl(
+            @RequestParam(value = "page",defaultValue = "1") Integer page,
+            @RequestParam(value = "size",defaultValue = "8")Integer size){
+        return missionTableService.selectMissionByDdl(page,size);
+    }
 }

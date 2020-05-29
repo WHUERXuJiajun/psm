@@ -43,5 +43,48 @@ public interface MissionTableService {
      */
     Page<MissionTable> selectMissionByKey(String key, Integer page, Integer size);
 
+    /**
+     *
+     * @description: 用户撤销任务
+     * @param mid
+     * @return
+     */
+    boolean mission_cancel(Integer mid);
+    /**
+     *
+     * @description: 用户更新任务
+     * @param mid
+     * @param title
+     * @param description
+     * @param money
+     * @param label1
+     * @param label2
+     * @param label3
+     * @param phone
+     * @return
+     */
 
+    boolean mission_update(Integer mid,String title,String description,double money,String label1,String label2,String label3,String phone);
+
+
+    /**
+     *
+     * @description: 根据发布时间排序,并分页
+     * @return
+     */
+    List<MissionTable> selectMissionByTime(Integer page,Integer size);
+
+    /**
+     *
+     * @description: 根据酬金排序，并分页
+     * @return
+     */
+    List<MissionTable> selectMissionByMoney(Integer page,Integer size);
+
+    /**
+     *
+     * @description: 根据截止时间排序，并分页
+     * @return
+     */
+    List<MissionTable> selectMissionByDdl(Integer page,Integer size);
 }

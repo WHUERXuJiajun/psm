@@ -42,14 +42,14 @@ public class PostServicelmpl implements PostService {
             MissionTable missionTable=new MissionTable();
             missionTable.setState(0);
             missionTable.setTitle(title);
-            missionTable.setDescription(description);
             missionTable.setLabel1(label1);
             missionTable.setLabel2(label2);
             missionTable.setLabel3(label3);
             missionTable.setMoney(money);
+            missionTable.setDescription(description);
             Date date=new Date();
             missionTable.setPostTime(date);
-            int mid=missionTableMapper.insert(missionTable);
+            Integer mid=missionTableMapper.insert(missionTable);
             insertPost(phone,mid);
             return true;
         }catch (Exception e) {
