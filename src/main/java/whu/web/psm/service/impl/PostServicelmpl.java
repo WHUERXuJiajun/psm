@@ -50,7 +50,8 @@ public class PostServicelmpl implements PostService {
             missionTable.setDescription(description);
             Date date=new Date();
             missionTable.setPostTime(date);
-            Integer mid=missionTableMapper.insert(missionTable);
+            missionTableMapper.insert(missionTable);
+            int mid = missionTableMapper.getNewId();
             insertPost(phone,mid);
             return true;
         }catch (Exception e) {

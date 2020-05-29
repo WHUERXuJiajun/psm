@@ -9,7 +9,7 @@ import whu.web.psm.pojo.MissionTable;
 /**
  * 对于任务的检索接口
  */
-public interface MissionTableElasticSearchMapper extends ElasticsearchRepository<MissionTable, String> {
+public interface MissionTableElasticSearchMapper extends ElasticsearchRepository<MissionTable, Integer> {
 
     Page<MissionTable> findByTitleOrDescriptionLike(String title, String description, Pageable pageable);
 

@@ -54,7 +54,7 @@ $(document).ready(function () {
             dataType: "json",
             data: {"phone":phone,"title": title, "description": description, "money":money, "label1":label1, "label2":label2, "label3":label3,"end_time":end_time},//请求需要发送的处理数据
             success: function (data) {
-                if (data == "true") {
+                if (data == true) {
                     alert("任务发布成功");
                 } else {
                     alert("任务发布失败");

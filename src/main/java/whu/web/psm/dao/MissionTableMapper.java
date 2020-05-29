@@ -140,4 +140,10 @@ public interface MissionTableMapper {
      * @return
      */
     List<MissionTable> getMissionByPage(Integer limit, Integer offset);
+
+    /**
+     * 获取新加入的id
+     * @return
+     */
+    int getNewId();
 }
