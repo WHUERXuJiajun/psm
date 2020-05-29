@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,13 +35,13 @@ public class UserServiceImpl implements UserService {
 
     private Map<String, UserDetails> tokenMap = new HashMap<>();
 
-    @Cacheable("user")
-    public User getUserFromToken(String token) {
-        if (token == null) {
+
+    @Override
+    public UserDetails getUserFromToken(String token) {
+        if(token == null) {
             return null;
         }
-        String phone = tokenMap.get(token).getPassword();
-        return userMapper.selectByPrimaryKey(phone);
+        return tokenMap.get(token);
     }
 
     @Override
@@ -61,14 +64,16 @@ public class UserServiceImpl implements UserService {
     public String login(String phone, String pwd) {
         User user = userMapper.selectByPrimaryKey(phone);//使用电话号码获取实体
         if (user.getPwd().equals(pwd)) {
-            List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-            if (user.getPhone().equals("15387315836")) {
-                //赋予此账号管理员权限
-                grantedAuthorities.add(new SimpleGrantedAuthority("manager"));
+            UserDetails userDetails;
+            if (phone.equals("15387315836")) {
+                //管理员
+                userDetails = createUser(phone,pwd,new String[]{"manager","user"});
+            } else {
+                //普通用户
+                userDetails = createUser(phone,pwd,new String[]{"user"});
             }
-            grantedAuthorities.add(new SimpleGrantedAuthority("user"));
+            //创建用户token
             String token = UUID.randomUUID().toString();
-            UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getPhone(), user.getPwd(), grantedAuthorities);
             tokenMap.put(token, userDetails);
             return token;
         } else {
@@ -132,4 +137,66 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
+    /**
+     * 直接调用，用于权限管理(封装了uid)
+     *
+     * @author  xsy
+     *
+     */
+    private UserDetails createUser (String userName, String password, String[]roles){
+        return new UserDetails() {
+
+            //private static final long serialVersionUID = 6905138725952656074L;
+
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                Collection<GrantedAuthority> authorities = new ArrayList<>();
+
+//                //这是增加了一种名为query的权限，可以使用 @hasAuthority("query") 来判断
+//                SimpleGrantedAuthority authority = new SimpleGrantedAuthority("query");
+//                authorities.add(authority);
+
+                //这是增加到xxx角色，可以用hasRole("xxx")来判断；需要注意所有的角色在这里增加时必须以ROLE_前缀，使用时则没有ROLES_前缀
+                for (String role : roles) {
+                    SimpleGrantedAuthority sga = new SimpleGrantedAuthority("ROLE_" + role);
+                    authorities.add(sga);
+                }
+                return authorities;
+            }
+
+            @Override
+            public String getPassword() {
+                return password;
+            }
+
+            @Override
+            public String getUsername() {
+                return userName;
+            }
+
+
+            @Override
+            public boolean isAccountNonExpired() {
+                return false;
+            }
+
+            @Override
+            public boolean isAccountNonLocked() {
+                return false;
+            }
+
+            @Override
+            public boolean isCredentialsNonExpired() {
+                return false;
+            }
+
+            @Override
+            public boolean isEnabled() {
+                return false;
+            }
+
+        };
+    }
 }
+

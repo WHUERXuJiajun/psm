@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import whu.web.psm.pojo.User;
 import whu.web.psm.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("api/user")
@@ -60,11 +63,11 @@ public class UserController {
     @GetMapping
     @ApiOperation(
             value = "获取用户信息",
-            notes = "输入token，返回用户的信息"
+            notes = "输入token，返回用户的电话"
     )
-    @ApiImplicitParam(value = "电话", name = "phone",paramType = "query",dataType = "String")
-    public User getUserByPhone(@RequestParam("phone") String token){
-        return userService.getUserFromToken(token);
+    public String getUserByPhone(HttpServletRequest request){
+        Principal principal = request.getUserPrincipal();
+        return principal.getName();
     }
     
     

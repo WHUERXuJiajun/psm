@@ -12,4 +12,6 @@ import whu.web.psm.pojo.MissionTable;
 public interface MissionTableElasticSearchMapper extends ElasticsearchRepository<MissionTable, String> {
 
     Page<MissionTable> findByTitleOrDescriptionLike(String title, String description, Pageable pageable);
+
+    void deleteAll();
 }

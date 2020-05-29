@@ -13,6 +13,14 @@ class UserMapperTest {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    MissionTableElasticSearchMapper missionTableElasticSearchMapper;
+
+    @Test
+    public void test(){
+        missionTableElasticSearchMapper.deleteAll();
+    }
+
     @Test
     void countByExample() {
     }

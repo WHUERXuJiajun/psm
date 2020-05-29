@@ -37,7 +37,7 @@ public class PostController {
     })
     public boolean postMission(@RequestParam("title") String title,
                                @RequestParam("description") String description,
-                               @RequestParam("money") String money,
+                               @RequestParam("money") double money,
                                @RequestParam("label1") String label1,
                                @RequestParam("label2") String label2,
                                @RequestParam("label3") String label3,

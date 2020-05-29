@@ -18,7 +18,7 @@ public interface PostService {
      * @param phone
      * @return
      */
-    boolean insertMissionTable(String title,String description,String money,String label1,String label2,String label3,String phone);
+    boolean insertMissionTable(String title,String description,double money,String label1,String label2,String label3,String phone);
     /**
      *
      * @description: 上传任务到post表

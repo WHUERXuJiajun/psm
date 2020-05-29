@@ -3,6 +3,7 @@ package whu.web.psm.service;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 import whu.web.psm.pojo.User;
 
@@ -16,13 +17,7 @@ import whu.web.psm.pojo.User;
 public interface UserService {
 
 
-	/**
-	 * 根据token获取用户信息
-	 *
-	 * @param token
-	 * @return
-	 */
-	User getUserFromToken(String token);
+	UserDetails getUserFromToken(String token);
 
 	/**
 	 * 
