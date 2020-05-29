@@ -92,7 +92,7 @@
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md8 content detail">
       <div class="fly-panel detail-box">
-        <span style="font-size: 30px;">求开发学生管理系统</span>
+        <span style="font-size: 30px;" id="title">求开发学生管理系统</span>
         
         <button style="
         float: right;
@@ -129,19 +129,19 @@
           </a>
           <div class="fly-detail-user">
             <a href="../user/home.html" class="fly-link">
-              <cite>贤心</cite>
+              <cite id="poster">贤心</cite>
               <i class="iconfont icon-renzheng" title="认证信息：{{ rows.user.approve }}"></i>
               <i class="layui-badge fly-badge-vip">VIP3</i>
             </a>
             <span>2017-11-30</span>
           </div>
           <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
-            <span style="padding-right: 10px; color: #FF7200">悬赏：60飞吻</span>  
+            <span style="padding-right: 10px; color: #FF7200" id="money"></span>  
             <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="../user/add.html">编辑此贴</a></span>
           </div>
         </div>
         <div class="detail-body photos">
-          <p>
+          <p id="description">
             求开发一个学生管理系统，有意者私聊
           </p>
           

@@ -1,7 +1,7 @@
 package whu.web.psm.controller;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -44,11 +44,8 @@ public class MissionTableController {
             value = "获取任务详情",
             notes = "根据mid获取任务详情"
     )
-    @ApiImplicitParams({
-
-            @ApiImplicitParam(value = "任务id", name = "mid",paramType = "query",dataType = "integer"),
-    })
-    public List<MissionTable> getDetails(@RequestParam("mid") Integer mid){
+    @ApiImplicitParam(value = "任务id", name = "mid",paramType = "query",dataType = "integer")
+    public Map<String, Object> getDetails(@RequestParam("mid") Integer mid){
         return missionTableService.getDetails(mid);
     }
 

@@ -3,6 +3,8 @@ package whu.web.psm.service;
 import org.springframework.data.domain.Page;
 import whu.web.psm.pojo.MissionTable;
 import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @description: “显示任务"服务模块接口
@@ -23,7 +25,7 @@ public interface MissionTableService {
      * @Param mid
      * @return
      */
-    List<MissionTable> getDetails(Integer mid);
+    Map<String, Object> getDetails(Integer mid);
 
 
     /**

@@ -56,6 +56,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == true) {
                     alert("任务发布成功");
+                    window.location.href = "../index/task.html"
                 } else {
                     alert("任务发布失败");
                 }

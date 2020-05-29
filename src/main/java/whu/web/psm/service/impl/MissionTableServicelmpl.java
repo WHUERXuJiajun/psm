@@ -1,7 +1,10 @@
 package whu.web.psm.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import whu.web.psm.dao.MissionTableElasticSearchMapper;
 import whu.web.psm.dao.MissionTableMapper;
+import whu.web.psm.dao.PostMapper;
 import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.pojo.MissionTableExample;
 import whu.web.psm.service.MissionTableService;
@@ -29,6 +33,9 @@ public class MissionTableServicelmpl implements MissionTableService {
     @Autowired
     MissionTableElasticSearchMapper missionTableElasticSearchMapper;
 
+    @Autowired
+    PostMapper postMapper;
+
     @Override
     public List<MissionTable> getMissions_all(Integer page, Integer size) {
         int offset = 0;
@@ -41,10 +48,13 @@ public class MissionTableServicelmpl implements MissionTableService {
     }
 
     @Override
-    public List<MissionTable> getDetails(Integer mid){
-        List<MissionTable> missionTable=new ArrayList<>();
-            missionTable.add(missionTableMapper.selectByPrimaryKey(mid));
-        return missionTable;
+    public Map<String, Object> getDetails(Integer mid){
+         MissionTable missionTable = missionTableMapper.selectByPrimaryKey(mid);
+         String phone = postMapper.selectPhoneByMid(missionTable.getMid());
+         Map<String, Object> ans = new HashMap<>();
+         ans.put("mission",missionTable);
+         ans.put("phone",phone);
+         return ans;
     }
 
     @Override

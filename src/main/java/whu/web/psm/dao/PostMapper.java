@@ -72,4 +72,7 @@ public interface PostMapper {
      * @mbggenerated
      */
     int updateByExample(@Param("record") PostKey record, @Param("example") PostExample example);
+
+
+    String selectPhoneByMid(Integer mid);
 }
