@@ -12,6 +12,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import whu.web.psm.service.PostService;
 
+import java.util.Date;
+
 
 @RestController
 @RequestMapping("api/post")
@@ -41,8 +43,9 @@ public class PostController {
                                @RequestParam("label1") String label1,
                                @RequestParam("label2") String label2,
                                @RequestParam("label3") String label3,
-                               @RequestParam("phone") String phone){
-        return postService.insertMissionTable(title,description,money,label1,label2,label3,phone);
+                               @RequestParam("phone") String phone,
+                               @RequestParam("end_time") Date end_time){
+        return postService.insertMissionTable(title,description,money,label1,label2,label3,phone,end_time);
     }
 /*
     @PostMapping(value = "/post2post")

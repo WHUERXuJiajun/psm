@@ -26,5 +26,7 @@ project:
 mybatis:
   typeAliasesPackage: whu.web.psm.*.pojo
   mapperLocations: classpath*:mapper/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8080

@@ -37,7 +37,7 @@ public class PostServicelmpl implements PostService {
         }
     }
     @Override
-    public boolean insertMissionTable(String title,String description,double money,String label1,String label2,String label3,String phone) {
+    public boolean insertMissionTable(String title,String description,double money,String label1,String label2,String label3,String phone,Date end_time) {
         try {
             MissionTable missionTable=new MissionTable();
             missionTable.setState(0);
@@ -46,6 +46,7 @@ public class PostServicelmpl implements PostService {
             missionTable.setLabel2(label2);
             missionTable.setLabel3(label3);
             missionTable.setMoney(money);
+            missionTable.setEndTime(end_time);
             missionTable.setDescription(description);
             Date date=new Date();
             missionTable.setPostTime(date);

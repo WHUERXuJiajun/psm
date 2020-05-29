@@ -20,7 +20,7 @@ $(document).ready(function () {
             dataType: "text",
             data: {"phone": username, "pwd": password},//请求需要发送的处理数据
             success: function (data) {
-                document.cookie = data;
+                window.localStorage.setItem('token',data);//保存用户当前token至localStorage
                 alert('登陆成功！');
                 window.location.href = "index.html";
             },

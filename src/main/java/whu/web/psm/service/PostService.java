@@ -1,4 +1,7 @@
 package whu.web.psm.service;
+
+import java.util.Date;
+
 /**
  *
  * @description: “上传任务"服务模块接口
@@ -18,7 +21,7 @@ public interface PostService {
      * @param phone
      * @return
      */
-    boolean insertMissionTable(String title,String description,double money,String label1,String label2,String label3,String phone);
+    boolean insertMissionTable(String title, String description, double money, String label1, String label2, String label3, String phone, Date end_time);
     /**
      *
      * @description: 上传任务到post表
