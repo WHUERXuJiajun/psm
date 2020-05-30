@@ -1,5 +1,6 @@
 package whu.web.psm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -28,7 +29,19 @@ public class Comment {
     String to_user;//被评论用户
 
     @ApiModelProperty(value="评论时间",name="comment_time")
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="GMT+8")
     Date comment_time;//评论时间
+
+    public Integer getThumbs() {
+        return thumbs;
+    }
+
+    public void setThumbs(Integer thumbs) {
+        this.thumbs = thumbs;
+    }
+
+    @ApiModelProperty(value="点赞数",name="thumbs")
+    Integer thumbs;//点赞数
 
 
 

@@ -19,6 +19,7 @@ $(document).ready(function () {
 
     $("#headerpage").load("../common/header.html");//加载导航栏
 
+
     function getUser() {
         let token = window.localStorage.getItem('token');
         let phone = "";
@@ -63,6 +64,8 @@ $(document).ready(function () {
             $("#poster").text(plusXing(data.phone,3,4,'*'));
         }
     });
+
+
 
     $("#collectBtn").click(function () {
         phone = getUser();

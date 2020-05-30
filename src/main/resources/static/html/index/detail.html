@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../../res/layui/css/layui.css">
   <link rel="stylesheet" href="../../res/css/global.css">
   <script src="../../json/vue.min.js"></script>
+  <script src="../../json/axios.min.js"></script>
   <style type="text/css">
   .btn-accept {
     
@@ -108,8 +109,8 @@
           <legend>回帖</legend>
         </fieldset>
 
-        <ul class="jieda" id="jieda">
-          <li data-id="111" class="jieda-daan">
+        <ul class="jieda" >
+          <li data-id="111" class="jieda-daan" v-for="comment in comments">
             <a name="item-1111111111"></a>
             <div class="detail-about detail-about-reply">
               <a class="fly-avatar" href="">
@@ -117,12 +118,12 @@
               </a>
               <div class="fly-detail-user">
                 <a href="" class="fly-link">
-                  <cite>贤心</cite>
-                  <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                  <i class="layui-badge fly-badge-vip">VIP3</i>              
+                  <cite>{{comment.from_user}}</cite>
+<!--                  <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
+<!--                  <i class="layui-badge fly-badge-vip">VIP3</i>              -->
                 </a>
                 
-                <span>(楼主)</span>
+<!--                <span>(楼主)</span>-->
                 <!--
                 <span style="color:#5FB878">(管理员)</span>
                 <span style="color:#FF9E3F">（社区之光）</span>
@@ -131,82 +132,49 @@
               </div>
 
               <div class="detail-hits">
-                <span>2017-11-30</span>
+                <span>{{comment.comment_time}}</span>
               </div>
 
     
             </div>
             <div class="detail-body jieda-body photos">
-              <p>回复1</p>
+              <a href="" class="fly-link"><cite>@{{comment.to_user}}</cite></a>
+              <p>{{comment.content}}</p>
             </div>
             <div class="jieda-reply">
               <span class="jieda-zan zanok" type="zan">
                 <i class="iconfont icon-zan"></i>
-                <em>66</em>
+                <em>{{comment.thumbs}}</em>
               </span>
-              <span type="reply">
-                <i class="iconfont icon-svgmoban53"></i>
-                回复
-              </span>
+<!--              <span type="reply">-->
+<!--                <i class="iconfont icon-svgmoban53"></i>-->
+<!--                回复-->
+<!--              </span>-->
               <div class="jieda-admin">
-                <span type="edit">回复</span>
-                <span type="del">删除</span>
+                <span @click="reply(comment)">回复</span>
+<!--                <span type="del">删除</span>-->
                 <!-- <span class="jieda-accept" type="accept">采纳</span> -->
               </div>
             </div>
           </li>
-          
-          <li data-id="111">
-            <a name="item-1111111111"></a>
-            <div class="detail-about detail-about-reply">
-              <a class="fly-avatar" href="">
-                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt=" ">
-              </a>
-              <div class="fly-detail-user">
-                <a href="" class="fly-link">
-                  <cite>贤心</cite>       
-                </a>
-              </div>
-              <div class="detail-hits">
-                <span>2017-11-30</span>
-              </div>
-            </div>
-            <div class="detail-body jieda-body photos">
-              <p>回复2</p>
-            </div>
-            <div class="jieda-reply">
-              <span class="jieda-zan" type="zan">
-                <i class="iconfont icon-zan"></i>
-                <em>0</em>
-              </span>
-              <span type="reply">
-                <i class="iconfont icon-svgmoban53"></i>
-                回复
-              </span>
-              <div class="jieda-admin">
-                <span type="edit">回复</span>
-                <span type="del">删除</span>
-              </div>
-            </div>
-          </li>
-          
+
           <!-- 无数据时 -->
           <!-- <li class="fly-none">消灭零回复</li> -->
         </ul>
         
         <div class="layui-form layui-form-pane">
-          <form action="/jie/reply/" method="post">
+          <form>
             <div class="layui-form-item layui-form-text">
               <a name="comment"></a>
               <div class="layui-input-block">
-                <textarea id="L_content" name="content" required lay-verify="required" placeholder="请输入内容"  class="layui-textarea fly-editor" style="height: 150px;"></textarea>
+                <textarea id="L_content" name="content" required lay-verify="required" placeholder="请输入内容"  class="layui-textarea fly-editor" style="height: 150px;" v-model="content"></textarea>
               </div>
             </div>
             <div class="layui-form-item">
               <input type="hidden" name="jid" value="123">
-              <button class="layui-btn" lay-filter="*" lay-submit>提交回复</button>
             </div>
           </form>
+          <button class="layui-btn" v-on:click="subReply">提交回复</button>
         </div>
       </div>
     </div>
@@ -284,8 +252,81 @@
 
 
 <script src="../../json/jquery.min.js"></script>
+
+<script>
+  var urlinfo = window.location.href;
+  var len = urlinfo.length;
+  var offset = urlinfo.indexOf("?");
+  var newsidinfo = urlinfo.substr(offset, len)
+  var newsids = newsidinfo.split("=");
+  var newsid = newsids[1];//得到参数值
+  var newsname = newsids[0];
+  var mid = newsid;//取得任务id
+  new Vue({
+    el: '#flyReply',
+    data: {
+      comments: [],
+      reply_user:"",
+      content:""
+    },
+    mounted(){
+      let self = this;
+      axios.defaults.baseURL = 'http://localhost:8080/'
+      //获取评论
+      axios.get("api/comment/"+mid, {
+      }).then(function (response) {
+        self.comments = response.data;
+      })
+
+    },
+    methods:{
+      reply:function (comment) {
+        let self = this;
+        let _textarea = document.getElementById('L_content');
+        _textarea.placeholder="回复 "+comment.from_user+" ：";
+        self.reply_user = comment.from_user;
+      },
+      subReply:function () {
+        console.log('11111111')
+        let self = this;
+        let token = window.localStorage.getItem('token');
+        let phone=''
+
+        axios.defaults.baseURL = 'http://localhost:8080/';
+        //获取当前用户
+        axios.get("api/user/", {
+          params:{},
+          headers: {'Authorization': token}
+        }).then(function (response) {
+          phone= response.data;
+        }).catch(function (error) {
+          console.log(error)
+          alert('请先登录')
+          window.location.href='login.html'
+        });
+
+        axios.post("api/comment/", {
+          "content": self.content,
+          "from_user": phone,
+          "mid": mid,
+          "to_user": self.reply_user
+        }, {
+          headers: {'Authorization': token}
+        }
+      ).then(function (response) {
+          self.missions = response.data; //此时还是字符串
+          alert('评论成功')
+          window.location.href="detail.html?mid="+mid;
+        }).catch(function (error) {
+          alert('评论失败')
+        });
+      }
+    }
+  });
+</script>
 <script src="../../json/index/detail.js"></script>
 <script src="../../res/layui/layui.js"></script>
+
 <script>
 layui.cache.page = 'jie';
 layui.cache.user = {
