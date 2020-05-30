@@ -41,4 +41,17 @@ public class CommentController {
         comment.setFrom_user(principal.getName());
         commentService.postComment(comment);
     }
+
+
+    @PreAuthorize("hasRole('user')")
+    @PutMapping(value = "/thumb")
+    @ApiOperation(
+            value = "点赞",
+            notes = "点赞"
+    )
+    List<Comment> addThumb(@RequestBody Comment comment) {
+        comment.setThumbs(comment.getThumbs()+1);
+        commentService.updateComment(comment);
+        return commentService.getCommentsByMid(comment.getMid());
+    }
 }

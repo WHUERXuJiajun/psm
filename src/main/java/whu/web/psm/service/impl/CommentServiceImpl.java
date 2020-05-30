@@ -34,4 +34,9 @@ public class CommentServiceImpl implements CommentService {
         comment.setThumbs(0);
         commentMapper.save(comment);
     }
+
+    @Override
+    public void updateComment(Comment comment) {
+        commentMapper.save(comment);
+    }
 }

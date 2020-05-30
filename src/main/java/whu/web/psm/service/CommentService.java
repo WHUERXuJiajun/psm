@@ -20,5 +20,9 @@ public interface CommentService {
      */
     void postComment(Comment comment);
 
-
+    /**
+     * 更新评论
+     * @param comment
+     */
+    void updateComment(Comment comment);
 }
