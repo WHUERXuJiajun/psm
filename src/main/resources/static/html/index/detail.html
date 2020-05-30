@@ -10,6 +10,7 @@
   <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
   <link rel="stylesheet" href="../../res/layui/css/layui.css">
   <link rel="stylesheet" href="../../res/css/global.css">
+  <script src="../../json/vue.min.js"></script>
   <style type="text/css">
   .btn-accept {
     
@@ -28,8 +29,8 @@
       <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li> 
       
       <!-- 用户登入后显示 -->
-      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html">我发布的任务</a></li> 
-      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html#collection">我关注的任务</a></li> 
+<!--      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html">我发布的任务</a></li> -->
+<!--      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html#collection">我关注的任务</a></li> -->
     </ul> 
     
     <div class="fly-column-right layui-hide-xs"> 
@@ -48,32 +49,31 @@
     <div class="layui-col-md8 content detail">
       <div class="fly-panel detail-box">
         <span style="font-size: 30px;" id="title">求开发学生管理系统</span>
-        
-        <button style="
+
+        <button id="collectBtn" style="
         float: right;
         height: 40px;
         width: 100px;
         margin: 0 5px;
         background: #5de24c;
         font-size: 16px;
-        font-weight: 1;
+        font-weight: normal;
+        color: rgb(71, 69, 233);">关注任务</button>
+        <button id="receiveBtn" style="
+        float: right;
+        height: 40px;
+        width: 100px;
+        margin: 0 5px;
+        background: #5de24c;
+        font-size: 16px;
+        font-weight: normal;
         color: rgb(71, 69, 233);">接受任务</button>
         <div class="fly-detail-info">
-          <span class="layui-badge" style="background-color: #999;">未结</span>
-          <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
-          
-          <span class="layui-badge layui-bg-black">置顶</span>
-          
-          <div class="fly-admin-box" data-id="123">
-            <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
-            
-            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span> 
-            <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span> -->
-            
-            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span> 
-            <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
-          </div>
-          <span class="fly-list-nums"> 
+          <span id="label1" class="layui-badge" style="background-color: #5FB878;">待定</span>
+
+          <span id="label2" class="layui-badge" style="background-color: #5FB878;">待定</span>
+          <span id="label3" class="layui-badge" style="background-color: #5FB878;">待定</span>
+          <span class="fly-list-nums">
             <a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i> 66</a>
             <i class="iconfont" title="人气">&#xe60b;</i> 99999
           </span>
@@ -85,14 +85,14 @@
           <div class="fly-detail-user">
             <a href="../user/home.html" class="fly-link">
               <cite id="poster">贤心</cite>
-              <i class="iconfont icon-renzheng" title="认证信息：{{ rows.user.approve }}"></i>
-              <i class="layui-badge fly-badge-vip">VIP3</i>
+<!--              <i class="iconfont icon-renzheng" title="认证信息：{{ rows.user.approve }}"></i>-->
+<!--              <i class="layui-badge fly-badge-vip">VIP3</i>-->
             </a>
             <span id="post_time">2017-11-30</span>
           </div>
           <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
             <span style="padding-right: 10px; color: #FF7200" id="money"></span>  
-            <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="../user/add.html">编辑此贴</a></span>
+<!--            <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="../user/add.html">编辑此贴</a></span>-->
           </div>
         </div>
         <div class="detail-body photos">

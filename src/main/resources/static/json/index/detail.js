@@ -52,16 +52,20 @@ $(document).ready(function () {
             post_phone = data.phone;
             $("#description").text(data.mission.description);
             $("#title").text(data.mission.title);
-            $("#label1").val(data.mission.label1);
-            $("#label2").val(data.mission.label2);
-            $("#label3").val(data.mission.label3);
+            if(data.mission.label1.length > 0)
+                $("#label1").text(data.mission.label1);
+            if(data.mission.label2.length > 0)
+                $("#label2").text(data.mission.label2);
+            if(data.mission.label3.length > 0)
+                $("#label3").text(data.mission.label3);
             $("#money").text('悬赏' + data.mission.money);
             $("#post_time").text(data.mission.postTime);
             $("#poster").text(plusXing(data.phone,3,4,'*'));
         }
     });
 
-    function addCollect() {
+    $("#collectBtn").click(function () {
+        phone = getUser();
         //收藏任务
         $.ajax({
             headers: {
@@ -70,17 +74,19 @@ $(document).ready(function () {
             type: "POST",
             url: "/api/collect",
             async: false,
+            contentType:'application/json;charset=UTF-8',
             dataType: "json",
-            data: { "mid": mid, "phone": phone },
+            data: JSON.stringify({ "mid": mid, "phone": phone }),
             success: function (data) {
-                if (data == true) {
-                    alert("收藏成功");
-                } else {
-                    alert("收藏失败");
-                }
+                alert('收藏成功！')
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                /*错误信息处理*/
+                alert('请先登录！');
+                window.location.href="login.html"
             }
         });
-    }
+    })
 
 
     function cancelCollect() {
@@ -106,7 +112,8 @@ $(document).ready(function () {
 
 
 
-    function receiveMission() {
+    $("#receiveBtn").click(function () {
+        phone = getUser();
         //接受任务
         $.ajax({
             headers: {
@@ -115,17 +122,23 @@ $(document).ready(function () {
             type: "POST",
             url: "/api/Rece/accept",
             async: false,
+            contentType:'application/json;charset=UTF-8',
             dataType: "json",
-            data: { "mid": mid, "phone": phone },
+            data: JSON.stringify({ "mid": mid, "phone": phone }),
             success: function (data) {
                 if (data == true) {
                     alert("接受任务成功");
                 } else {
                     alert("接受任务失败");
                 }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                /*错误信息处理*/
+                //alert('请先登录！');
+                //window.location.href="login.html"
             }
         });
-    }
+    })
 
 
     /* 电话号码部分隐藏处理
