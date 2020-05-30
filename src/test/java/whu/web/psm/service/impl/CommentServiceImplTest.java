@@ -29,4 +29,13 @@ public class CommentServiceImplTest {
         comment.setFrom_user("test");
         commentService.postComment(comment);
     }
+
+    @Test
+    public void updateComment() {
+        Comment comment = new Comment();
+        comment.setMid(1);
+        comment.setContent("这是测试评论");
+        comment.setFrom_user("test");
+        commentService.updateComment(comment);
+    }
 }
