@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -20,12 +22,10 @@ public class PostServicelmplTest {
     @Test
     public void insertMissionTable() {
         boolean res;
-        res = postServicelmpl.insertMissionTable("test", "Mytest", "11",
-                "label1","label2", "label3", phone);
+        Date endDate = new Date();
+        endDate.setTime(1000);
+        res = postServicelmpl.insertMissionTable("test", "My test", 1.1,
+                "label1","label2", "label3", phone, endDate);
         assertTrue(res);
-        //信息错误时
-        res = postServicelmpl.insertMissionTable("test", "Mytest", "11",
-                "label1","label2", "label3", phone+'1');
-        assertFalse(res);
     }
 }
