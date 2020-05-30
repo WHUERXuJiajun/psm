@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import whu.web.psm.dao.MissionTableMapper;
 import whu.web.psm.dao.ReceMapper;
 import whu.web.psm.pojo.MissionTable;
+import whu.web.psm.pojo.MissionTableExample;
 import whu.web.psm.pojo.ReceKey;
 import whu.web.psm.service.ReceService;
 
@@ -32,13 +33,15 @@ public class ReceServiceImpl implements ReceService {
 	public boolean insertRece(ReceKey receKey) {
 		try {
 			//插入用户-任务数据
-			receMapper.insert(receKey);
+			int row = receMapper.insert(receKey);
+			if(row!=1)
+				return false;
 			//获取任务
 			MissionTable missionTable = missionTableMapper.selectByPrimaryKey(receKey.getMid());
 			//任务state改为1（正在进行）
 			missionTable.setState(1);
 			//更新任务列表
-			missionTableMapper.updateByExampleSelective(missionTable, null);
+			missionTableMapper.updateByPrimaryKey(missionTable);
 			return true;
 		}catch (Exception e) {
 			return false;
@@ -60,13 +63,15 @@ public class ReceServiceImpl implements ReceService {
 	public boolean cancelMission(ReceKey receKey) {
 		try {
 			//删除用户-任务
-			receMapper.deleteByPrimaryKey(receKey);
+			int row = receMapper.deleteByPrimaryKey(receKey);
+			if(row!=1)
+				return false;
 			//获取任务
 			MissionTable missionTable = missionTableMapper.selectByPrimaryKey(receKey.getMid());
 			//任务state改为0
-			missionTable.setState(01);
+			missionTable.setState(0);
 			//更新任务列表
-			missionTableMapper.updateByExampleSelective(missionTable, null);
+			missionTableMapper.updateByPrimaryKey(missionTable);
 			return true;
 		} catch (Exception e) {
 			return false;
