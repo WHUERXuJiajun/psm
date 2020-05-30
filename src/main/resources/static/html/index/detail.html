@@ -267,7 +267,7 @@
     data: {
       comments: [],
       reply_user:"",
-      content:""
+      content:"",
     },
     mounted(){
       let self = this;
@@ -290,24 +290,11 @@
         console.log('11111111')
         let self = this;
         let token = window.localStorage.getItem('token');
-        let phone=''
 
         axios.defaults.baseURL = 'http://localhost:8080/';
-        //获取当前用户
-        axios.get("api/user/", {
-          params:{},
-          headers: {'Authorization': token}
-        }).then(function (response) {
-          phone= response.data;
-        }).catch(function (error) {
-          console.log(error)
-          alert('请先登录')
-          window.location.href='login.html'
-        });
 
         axios.post("api/comment/", {
           "content": self.content,
-          "from_user": phone,
           "mid": mid,
           "to_user": self.reply_user
         }, {
@@ -316,7 +303,8 @@
       ).then(function (response) {
           self.missions = response.data; //此时还是字符串
           alert('评论成功')
-          window.location.href="detail.html?mid="+mid;
+          console.log(self.phone)
+          //window.location.href="detail.html?mid="+mid;
         }).catch(function (error) {
           alert('评论失败')
         });

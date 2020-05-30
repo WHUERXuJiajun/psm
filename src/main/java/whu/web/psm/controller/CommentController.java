@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import whu.web.psm.pojo.Comment;
 import whu.web.psm.service.CommentService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -34,7 +36,9 @@ public class CommentController {
             value = "添加评论",
             notes = "id和comment_time不需要添加，后台会添加"
     )
-   void postComment(@RequestBody Comment comment) {
+   void postComment(@RequestBody Comment comment, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        comment.setFrom_user(principal.getName());
         commentService.postComment(comment);
     }
 }
