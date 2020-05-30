@@ -31,6 +31,7 @@ public class CommentServiceImpl implements CommentService {
     public void postComment(Comment comment) {
         comment.setId(UUIDUtil.getId());
         comment.setComment_time(new Date());
+        comment.setThumbs(0);
         commentMapper.save(comment);
     }
 }
