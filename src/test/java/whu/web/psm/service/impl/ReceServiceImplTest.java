@@ -46,5 +46,7 @@ public class ReceServiceImplTest {
         receKey.setMid(8);
         res = receService.cancelMission(receKey);
         assertTrue(res);
+        res = receService.cancelMission(receKey);
+        assertFalse(res);
     }
 }
