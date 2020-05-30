@@ -12,54 +12,8 @@
 </head>
 <body>
 
-  <div class="fly-panel fly-column">
-    <div class="layui-container">
-      <ul class="layui-clear">
-        <li class="layui-hide-xs layui-this"><a href="../index/index.html">首页</a></li> 
-        <li><a href="../index/task.html">任务</a></li> 
-        <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li> 
-        
-        <!-- 用户登入后显示 -->
-        <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html">我发布的任务</a></li> 
-        <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html#collection">我关注的任务</a></li> 
-      </ul> 
-      
-      <div class="fly-column-right layui-hide-xs"> 
-        <span class="fly-search"><i class="layui-icon"></i></span> 
-        <a href="add.html" class="layui-btn">发表任务</a>
-      </div> 
-      <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;"> 
-        <a href="add.html" class="layui-btn">发表任务</a>
-      </div> 
-    </div>
-</div>
+<div id="headerpage"></div>
 
-<div class="fly-header layui-bg-black">
-  <div class="layui-container">
-    <a class="fly-logo" href="../index/index.html">
-      <img src="../../res/images/logo.png" alt="layui">
-    </a>
-    
-    <ul class="layui-nav fly-nav-user">
-      <!-- 登入后的状态 -->
-      <li class="layui-nav-item">
-        <a class="fly-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">贤心</cite>
-          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-          <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
-          <dd><a href="" style="text-align: center;">退出</a></dd>
-        </dl>
-      </li>
-    </ul>
-  </div>
-</div>
 
 <div class="layui-container fly-marginTop fly-user-main">
   <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
@@ -108,38 +62,24 @@
     -->
     <div class="layui-tab layui-tab-brief" lay-filter="user">
       <ul class="layui-tab-title" id="LAY_mine">
-        <li data-type="mine-jie" lay-id="index" class="layui-this">我发布的任务（<span>89</span>）</li>
-        <li data-type="collection" data-url="/collection/find/" lay-id="collection">我关注的任务（<span>16</span>）</li>
+        <li data-type="mine-jie" lay-id="index" class="layui-this">我发布的任务</li>
+        <li data-type="collection" data-url="/collection/find/" lay-id="collection">我关注的任务</li>
       </ul>
-      <div class="layui-tab-content" style="padding: 20px 0;">
+      <div class="layui-tab-content" style="padding: 20px 0;" id="index">
         <div class="layui-tab-item layui-show">
           <ul class="mine-view jie-row">
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">求开发学生管理系统</a>
-              <i>2017/3/14 上午8:30:00</i>
-              <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-              <em>661阅/10答</em>
-            </li>
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">求开发学生管理系统</a>
-              <i>2017/3/14 上午8:30:00</i>
-              <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-              <em>661阅/10答</em>
-            </li>
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">求开发学生管理系统</a>
-              <i>2017/3/14 上午8:30:00</i>
-              <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-              <em>661阅/10答</em>
+            <li v-for="mission in post_missions">
+              <a class="jie-title" @click="goDetail(mission)" target="_blank">{{mission.title}}</a>
+              <i>{{mission.postTime}}</i>
+<!--              <em>661阅/10答</em>-->
             </li>
           </ul>
           <div id="LAY_page"></div>
         </div>
         <div class="layui-tab-item">
           <ul class="mine-view jie-row">
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">求开发学生管理系统</a>
-              <i>收藏于23小时前</i>  </li>
+            <li v-for="mission in collect_missions">
+              <a class="jie-title" @click="goDetail(mission)" target="_blank">{{mission.title}}</a>
           </ul>
           <div id="LAY_page1"></div>
         </div>
@@ -156,6 +96,43 @@
 </div>
 
 <script src="../../res/layui/layui.js"></script>
+<script src="../../json/jquery.min.js"></script>
+<script src="../../json/vue.min.js"></script>
+<script src="../../json/axios.min.js"></script>
+<script src="../../json/user/index.js"></script>
+<script>
+  new Vue({
+    el: '#index',
+    data: {
+      post_missions:[],
+      collect_missions:[]
+    },
+    mounted() {
+      let self = this;
+      let token = window.localStorage.getItem('token');
+      axios.defaults.baseURL = 'http://localhost:8080/'
+      axios.get("api/post/getMissionsByPhone", {
+        params:{},
+        headers: {'Authorization': token}
+      }).then(function (response) {
+        self.post_missions = response.data; //此时还是字符串
+      })
+
+      axios.defaults.baseURL = 'http://localhost:8080/'
+      axios.get("api/collect", {
+        params:{},
+        headers: {'Authorization': token}
+      }).then(function (response) {
+        self.collect_missions = response.data; //此时还是字符串
+      })
+    },
+    methods:{
+      goDetail:function (mission) {
+        window.location.href = "../index/detail.html?mid="+mission.mid;
+      }
+    }
+  })
+</script>
 <script>
 layui.cache.page = 'user';
 layui.cache.user = {

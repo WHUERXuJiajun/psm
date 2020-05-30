@@ -75,4 +75,6 @@ public interface PostMapper {
 
 
     String selectPhoneByMid(Integer mid);
+
+    List<Integer> selectMidByPhone(String phone);
 }

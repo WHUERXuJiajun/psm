@@ -12,28 +12,7 @@
 </head>
 <body style="margin-top: 65px;">
 
-  <div class="fly-panel fly-column">
-    <div class="layui-container">
-      <ul class="layui-clear">
-        <li class="layui-hide-xs layui-this"><a href="../index/index.html">首页</a></li> 
-        <li><a href="../index/task.html">任务</a></li> 
-        <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li> 
-        
-        <!-- 用户登入后显示 -->
-        <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html">我发布的任务</a></li> 
-        <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html#collection">我关注的任务</a></li> 
-      </ul> 
-      
-      <div class="fly-column-right layui-hide-xs"> 
-        <span class="fly-search"><i class="layui-icon"></i></span> 
-        <a href="add.html" class="layui-btn">发表任务</a>
-      </div> 
-      <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;"> 
-        <a href="add.html" class="layui-btn">发表任务</a>
-      </div> 
-    </div>
-</div>
-  
+<div id="headerpage"></div>
 <div class="fly-header layui-bg-black">
   <div class="layui-container">
     <a class="fly-logo" href="../index/index.html">
@@ -184,6 +163,12 @@ full: true
   <script src="../../json/jquery.min.js"></script>
   <script src="../../json/user/home.js"></script>
 <script src="../../res/layui/layui.js"></script>
+<script>
+  $(function(){
+    //公共部分导航栏
+    $("#headerpage").load("../common/header.html");
+  });
+</script>
 <script>
 layui.cache.page = 'user';
 layui.cache.user = {

@@ -2,6 +2,9 @@ $(function () {
     let token = window.localStorage.getItem('token');
     let phone = "";
 
+    $("#headerpage").load("../common/header.html");
+
+
     function getUser(){
         let token = window.localStorage.getItem('token');
         let phone = "";

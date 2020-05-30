@@ -88,8 +88,9 @@ public class UserServiceImpl implements UserService {
         return row == 1;
     }
 
-    public void logout(String token) {
+    public boolean logout(String token) {
         tokenMap.remove(token);
+        return true;
     }
 
     @Override

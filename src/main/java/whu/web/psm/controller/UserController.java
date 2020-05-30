@@ -98,14 +98,13 @@ public class UserController {
     
     
     @PreAuthorize("hasRole('user')")
-    @DeleteMapping(value = "/logout")
+    @GetMapping(value = "/logout")
     @ApiOperation(
             value = "退出登录",
             notes = "输入token，退出登录"
     )
-    @ApiImplicitParam(value = "token", name = "token",paramType = "query",dataType = "String")
-    public void updateUser(@RequestParam String token){
-        userService.logout(token);
+    public boolean updateUser(@RequestParam String token){
+        return userService.logout(token);
     }
     
     

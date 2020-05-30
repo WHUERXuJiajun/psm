@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $("#headerpage").load("../common/header.html");
 
     function getUser(){
         let token = window.localStorage.getItem('token');

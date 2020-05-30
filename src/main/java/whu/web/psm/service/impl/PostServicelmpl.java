@@ -1,6 +1,9 @@
 package whu.web.psm.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +39,17 @@ public class PostServicelmpl implements PostService {
             return false;
         }
     }
+
+    @Override
+    public List<MissionTable> getMissionsByPhone(String phone) {
+        List<Integer> mids = postMapper.selectMidByPhone(phone);
+        List<MissionTable> missionTables = new ArrayList<>();
+        for (int mid : mids){
+            missionTables.add(missionTableMapper.selectByPrimaryKey(mid));
+        }
+        return missionTables;
+    }
+
     @Override
     public boolean insertMissionTable(String title,String description,double money,String label1,String label2,String label3,String phone,Date end_time) {
         try {

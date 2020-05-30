@@ -194,5 +194,8 @@
     select phone from post
     where mid = #{mid,jdbcType=INTEGER}
   </select>
-
+  <select id="selectMidByPhone" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select mid from post
+    where phone = #{phone,jdbcType=VARCHAR}
+  </select>
 </mapper>

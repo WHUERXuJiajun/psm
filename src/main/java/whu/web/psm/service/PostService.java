@@ -1,6 +1,9 @@
 package whu.web.psm.service;
 
+import whu.web.psm.pojo.MissionTable;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -30,4 +33,13 @@ public interface PostService {
      * @return
      */
     boolean insertPost(String phone,Integer mid);
+
+
+    /**
+     * 根据电话获取发布的任务
+     *
+     * @param phone
+     * @return
+     */
+    List<MissionTable> getMissionsByPhone(String phone);
 }

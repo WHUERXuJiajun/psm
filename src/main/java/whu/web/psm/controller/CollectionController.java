@@ -9,6 +9,8 @@ import whu.web.psm.pojo.Collection;
 import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.service.CollectionService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -24,8 +26,9 @@ public class CollectionController {
             value = "根据用户电话获取收藏的任务",
             notes = "根据用户电话获取收藏的任务"
     )
-    List<MissionTable> getCollectMissionsByPhone(@RequestParam String phone) {
-        return collectionService.getCollectMissionsByPhone(phone);
+    List<MissionTable> getCollectMissionsByPhone(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        return collectionService.getCollectMissionsByPhone(principal.getName());
     }
 
     @PreAuthorize("hasRole('user')")

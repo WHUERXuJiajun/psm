@@ -64,7 +64,7 @@ public interface UserService {
 	/**
 	 * 退出登录
 	 */
-	void logout(String token);
+	boolean logout(String token);
 	
 	
 	

@@ -3,16 +3,17 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.service.PostService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 
 
 @RestController
@@ -46,6 +47,19 @@ public class PostController {
                                @RequestParam("phone") String phone,
                                @RequestParam("end_time") Date end_time){
         return postService.insertMissionTable(title,description,money,label1,label2,label3,phone,end_time);
+    }
+
+
+
+    @PreAuthorize("hasRole('user')")
+    @GetMapping(value = "/getMissionsByPhone")
+    @ApiOperation(
+            value = "获取用户发布的任务",
+            notes = "获取用户发布的任务"
+    )
+    public List<MissionTable> getMissionsByPhone( HttpServletRequest request){
+        Principal principal = request.getUserPrincipal();
+        return postService.getMissionsByPhone(principal.getName());
     }
 /*
     @PostMapping(value = "/post2post")
