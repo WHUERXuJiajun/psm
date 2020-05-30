@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 import whu.web.psm.pojo.User;
@@ -72,8 +73,9 @@ public class UserServiceImplTest {
     public void updateUser() {
         boolean res;
         //测试正确的用户
-        String token = userService.login(userName, pwd);
-        User user = userService.getUserFromToken(token);
+        User user = new User();
+        user.setPhone(userName);
+        user.setPwd(pwd);
         res = userService.updateUser(user);
         assertTrue(res);
         //错误的用户
