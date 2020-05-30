@@ -12,7 +12,11 @@ $(document).ready(function () {
     }
 
     var token = window.localStorage.getItem('token');
-    var phone = getUser();//取得phone
+    var phone = "";//取得phone
+    let post_phone = "";//发布者phone
+
+    let mission = null;//当前任务
+
 
     function getUser() {
         let token = window.localStorage.getItem('token');
@@ -41,19 +45,22 @@ $(document).ready(function () {
         url: "/api/MissionTable/getDetails",
         async: false,
         dataType: "json",
-        data: {"mid": mid},
+        data: { "mid": mid },
         success: function (data) {
+            mission = data.mission;
+            post_phone = data.phone;
             $("#description").text(data.mission.description);
             $("#title").text(data.mission.title);
             $("#label1").val(data.mission.label1);
             $("#label2").val(data.mission.label2);
             $("#label3").val(data.mission.label3);
-            $("#money").text('悬赏'+data.mission.money);
-            $("#poster").text(data.phone);
+            $("#money").text('悬赏' + data.mission.money);
+            $("#post_time").text(data.mission.postTime);
+            $("#poster").text(plusXing(data.phone,3,4,'*'));
         }
     });
 
-    function addCollect(){
+    function addCollect() {
         //收藏任务
         $.ajax({
             headers: {
@@ -63,7 +70,7 @@ $(document).ready(function () {
             url: "/api/collect",
             async: false,
             dataType: "json",
-            data: {"mid": mid, "phone": phone},
+            data: { "mid": mid, "phone": phone },
             success: function (data) {
                 if (data == true) {
                     alert("收藏成功");
@@ -75,7 +82,7 @@ $(document).ready(function () {
     }
 
 
-    function cancelCollect(){
+    function cancelCollect() {
         //取消收藏
         $.ajax({
             headers: {
@@ -85,7 +92,7 @@ $(document).ready(function () {
             url: "/api/collect",
             async: false,
             dataType: "json",
-            data: {"mid": mid, "phone": phone},
+            data: { "mid": mid, "phone": phone },
             success: function (data) {
                 if (data == true) {
                     alert("取消收藏成功");
@@ -98,7 +105,7 @@ $(document).ready(function () {
 
 
 
-    function receiveMission(){
+    function receiveMission() {
         //接受任务
         $.ajax({
             headers: {
@@ -108,7 +115,7 @@ $(document).ready(function () {
             url: "/api/Rece/accept",
             async: false,
             dataType: "json",
-            data: {"mid": mid, "phone": phone},
+            data: { "mid": mid, "phone": phone },
             success: function (data) {
                 if (data == true) {
                     alert("接受任务成功");
@@ -118,6 +125,22 @@ $(document).ready(function () {
             }
         });
     }
+
+
+    /* 电话号码部分隐藏处理
+    ** str 需要处理的字符串
+    ** frontLen 保留的前几位
+    ** endLen 保留的后几位
+    ** cha 替换的字符串
+    */
+    function plusXing(str, frontLen, endLen, cha) {
+        var len = str.length - frontLen - endLen;
+        var xing = '';
+        for (var i = 0; i < len; i++) {
+            xing += cha;
+        }
+        return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
+    };
 
 
     return false;
