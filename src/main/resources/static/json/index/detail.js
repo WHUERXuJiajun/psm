@@ -140,7 +140,7 @@ $(document).ready(function () {
             xing += cha;
         }
         return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
-    };
+    }
 
 
     return false;

@@ -10,6 +10,8 @@
   <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
   <link rel="stylesheet" href="../../res/layui/css/layui.css">
   <link rel="stylesheet" href="../../res/css/global.css">
+  <script src="../../json/vue.min.js"></script>
+  <script src="../../json/axios.min.js"></script>
 </head>
 <body>
 
@@ -83,7 +85,7 @@
   </div>
 </div>
 
-<div class="layui-container">
+<div class="layui-container" id="index">
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md8">
       <div class="fly-panel">
@@ -97,120 +99,21 @@
           </div>
         </div> 
         <div class="fly-panel-title fly-filter">
-          <a>置顶</a>
-          <a href="#signin" class="layui-hide-sm layui-show-xs-block fly-right" id="LAY_goSignin" style="color: #FF5722;">去签到</a>
+          <a>紧急</a>
         </div>
         <ul class="fly-list">
-          <li>
+          <li v-for = "urgent_mission in urgent_missions">
             <a href="../user/home.html" class="fly-avatar">
               <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
             </a>
             <h2>
               <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
+              <a v-on:click="goDetail(urgent_mission)" id="title">{{urgent_mission.title}}</a>
             </h2>
             <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-              </a>
-              <span>2020.5.20-2020.6.20</span>
+              <span id="end_time">截止时间：{{urgent_mission.endTime}}</span>
               
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--
-              <span class="layui-badge layui-bg-black">置顶</span>
-              <span class="layui-badge layui-bg-red">精帖</span>
-              -->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2017-11-30</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--
-              <span class="layui-badge layui-bg-black">置顶</span>
-              <span class="layui-badge layui-bg-red">精帖</span>
-              -->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--
-              <span class="layui-badge layui-bg-black">置顶</span>
-              <span class="layui-badge layui-bg-red">精帖</span>
-              -->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
+              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻" id="money">金额 {{urgent_mission.money}}</span>
               <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
               <span class="fly-list-nums"> 
                 <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
@@ -229,351 +132,23 @@
       <div class="fly-panel" style="margin-bottom: 0;">
         
         <div class="fly-panel-title fly-filter">
-          <a href="" class="layui-this">综合</a>
+          <a href="" class="layui-this">搜索结果</a>
           <span class="fly-mid"></span>
-          <a href="">IT/软件</a>
-          <span class="fly-mid"></span>
-          <a href="">社团</a>
-          <span class="fly-mid"></span>
-          <a href="">宠物</a>
-          <span class="fly-mid"></span>
-          <a href="">二手物品</a>
-          <span class="fly-mid"></span>
-          <a href="">实习</a>
-          <span class="fly-mid"></span>
-          <a href="">家教</a>
-          <span class="fly-mid"></span>
-          <a href="">其他</a>
-          <span class="fly-filter-right layui-hide-xs">
-            <a href="" class="layui-this">按最新</a>
-            <span class="fly-mid"></span>
-            <a href="">按热议</a>
-          </span>
         </div>
 
         <ul class="fly-list">          
-          <li>
+          <li v-for="search_mission in search_missions">
             <a href="../user/home.html" class="fly-avatar">
               <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
             </a>
             <h2>
               <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
+              <a v-on:click="goDetail(search_mission)">{{search_mission.title}}</a>
             </h2>
             <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
+              <span>截止时间：{{search_mission.endTime}}</span>
               
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
-              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
-              <span class="fly-list-nums"> 
-                <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
-              </span>
-            </div>
-            <div class="fly-list-badge">
-              <!--<span class="layui-badge layui-bg-red">精帖</span>-->
-            </div>
-          </li>
-          <li>
-            <a href="../user/home.html" class="fly-avatar">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
-            </a>
-            <h2>
-              <a class="layui-badge">任务</a>
-              <a href="detail.html">求开发学生管理系统</a>
-            </h2>
-            <div class="fly-list-info">
-              <a href="../user/home.html" link>
-                <cite>贤心</cite>
-                <!--
-                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                <i class="layui-badge fly-badge-vip">VIP3</i>
-                -->
-              </a>
-              <span>2020.5.20-2020.6.20</span>
-              
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 60</span>
+              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 {{search_mission.money}}</span>
               <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
               <span class="fly-list-nums"> 
                 <i class="iconfont icon-pinglun1" title="完成任务"></i> 66
@@ -595,26 +170,10 @@
     <div class="layui-col-md4">
 
       <div class="fly-panel">
-        <h3 class="fly-panel-title">温馨通道</h3>
+        <h3 class="fly-panel-title">最新任务</h3>
         <ul class="fly-panel-main fly-list-static">
-          <li>
-            <a href="http://fly.layui.com/4281/" target="_blank">根据用户喜好产生的推送</a>
-          </li>
-          <li>
-            <a href="http://fly.layui.com/5366/" target="_blank">
-              根据用户喜好产生的推送
-            </a>
-          </li>
-          <li>
-            <a href="http://fly.layui.com/4281/" target="_blank">根据用户喜好产生的推送</a>
-          </li>
-          <li>
-            <a href="http://fly.layui.com/5366/" target="_blank">
-              根据用户喜好产生的推送
-            </a>
-          </li>
-          <li>
-            <a href="http://fly.layui.com/4281/" target="_blank">根据用户喜好产生的推送</a>
+          <li v-for="new_mission in new_missions">
+            <a v-on:click="goDetail(new_mission)" target="_blank">{{new_mission.title}}</a>
           </li>
         </ul>
       </div>
@@ -642,67 +201,12 @@
       </div>
 
       <div class="fly-panel fly-rank fly-rank-reply" id="LAY_replyRank">
-        <h3 class="fly-panel-title">周榜</h3>
+        <h3 class="fly-panel-title">风云榜</h3>
         <dl>
           <!--<i class="layui-icon fly-loading">&#xe63d;</i>-->
-          <dd>
+          <dd v-for="user in users">
             <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
-            </a>
-          </dd>
-          <dd>
-            <a href="../user/home.html">
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次完成任务</i>
+              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>{{user.username}}</cite><i>{{user.score}}分</i>
             </a>
           </dd>
         </dl>
@@ -786,8 +290,8 @@
 </div>
 
 <script src="../../json/jquery.min.js"></script>
-<script src="../../json/user/index.js"></script>
 <script src="../../res/layui/layui.js"></script>
+<script src="../../json/index/index.js"></script>
 <script>
 layui.cache.page = '';
 layui.cache.user = {
