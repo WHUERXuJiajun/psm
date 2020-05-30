@@ -1,4 +1,5 @@
 $(function () {
+    $(".headerpage").load("../common/header.html");
     $("#register").click(function () {
         let username = $("#phone").val();
         let password = $("#pwd").val();

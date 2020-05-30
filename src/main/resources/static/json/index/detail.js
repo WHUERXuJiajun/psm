@@ -17,6 +17,7 @@ $(document).ready(function () {
 
     let mission = null;//当前任务
 
+    $("#headerpage").load("../common/header.html");//加载导航栏
 
     function getUser() {
         let token = window.localStorage.getItem('token');

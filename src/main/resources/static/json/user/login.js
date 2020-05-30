@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $(".headerpage").load("../common/header.html");
+
     $("#login").click(function () {
         var username = $("#L_email").val();
         var password = $("#L_pass").val();
