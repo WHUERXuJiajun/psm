@@ -25,6 +25,7 @@ import whu.web.psm.pojo.User;
 import javax.management.relation.Role;
 
 import java.io.*;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -34,12 +35,10 @@ import static org.junit.Assert.*;
 public class UserControllerTest {
 
     @Autowired
-    private WebApplicationContext userContext;
-    @Autowired
     private MockMvc mockMvc;
 
     private String UrlBase = "/api/user";
-    private String phone = "173737";
+    private String phone = "" + new Random().nextInt();
     private String pwd = "123456";
 
     @Test
@@ -67,6 +66,7 @@ public class UserControllerTest {
     @WithMockUser(roles = {"user"})
     public void getUserByPhone() throws Exception {
         MvcResult res = mockMvc.perform(MockMvcRequestBuilders.get(UrlBase)
+                .param("phone", phone)
                 .accept(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print()).andReturn();

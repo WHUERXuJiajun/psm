@@ -33,8 +33,9 @@ public class CommentServiceImplTest {
     @Test
     public void updateComment() {
         Comment comment = new Comment();
+        comment.setId("1");
         comment.setMid(1);
-        comment.setContent("这是测试评论");
+        comment.setContent("这是测试更新评论");
         comment.setFrom_user("test");
         commentService.updateComment(comment);
     }
