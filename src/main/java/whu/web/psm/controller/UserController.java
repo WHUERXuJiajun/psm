@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
+import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.pojo.User;
 import whu.web.psm.service.UserService;
 
@@ -106,7 +107,16 @@ public class UserController {
 				    		@RequestParam String newPwd){
         return userService.updatePwd(phone, oldPwd, newPwd);
     }
-    
+
+   // @PreAuthorize("hasRole('user')")
+    @PutMapping(value = "/updateCredit")
+    @ApiOperation(
+            value = "用户信誉积分减二",
+            notes = "用户信誉积分减二"
+    )
+    public boolean updateCredit(@RequestBody MissionTable mission){
+         return userService.updateCreditByMission(mission);
+    }
     
     
     @PreAuthorize("hasRole('user')")

@@ -14,9 +14,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
+import whu.web.psm.dao.PostMapper;
 import whu.web.psm.dao.UserMapper;
+import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.pojo.User;
+import whu.web.psm.pojo.UserExample;
+import whu.web.psm.service.PostService;
 import whu.web.psm.service.UserService;
 
 /**
@@ -27,11 +32,14 @@ import whu.web.psm.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Value("${project.upload.path}")
+ //   @Value("${project.upload.path}")
     private String basePath;//文件上传基本路径
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    PostMapper postMapper;
 
     private Map<String, UserDetails> tokenMap = new HashMap<>();
 
@@ -206,6 +214,26 @@ public class UserServiceImpl implements UserService {
             }
 
         };
+    }
+
+    @Override
+    public int updateCredit(String phone){
+        User user = userMapper.selectByPrimaryKey(phone);
+        user.setCredit(user.getCredit()-2);
+        return userMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
+    public boolean updateCreditByMission(MissionTable mission){
+        //查询发布人
+        String user = postMapper.selectPhoneByMid(mission.getMid());
+        Date date = new Date();
+        if(date.compareTo(mission.getEndTime())== 1){
+            updateCredit(user);
+            return true;
+        }
+        else
+            return false;
     }
 }
 

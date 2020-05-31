@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
+import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.pojo.User;
 
 /**
@@ -87,4 +88,20 @@ public interface UserService {
 	 * @param phone -- 用户电话
 	 */
 	boolean uploadIcon(MultipartFile icon, String phone) throws IOException;
+
+	/**
+	 * 减用户信誉分
+	 *
+	 *
+	 * @param phone -- 用户名
+	 */
+	int updateCredit(String phone);
+
+	/**
+	 * 根据任务减用户信誉分
+	 *
+	 *
+	 * @param mission -- 用户名
+	 */
+	boolean updateCreditByMission(MissionTable mission);
 }
