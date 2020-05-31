@@ -80,6 +80,7 @@
           <ul class="mine-view jie-row">
             <li v-for="mission in collect_missions">
               <a class="jie-title" @click="goDetail(mission)" target="_blank">{{mission.title}}</a>
+              <a class="mine-edit" @click="cancelCollect(mission)">取消</a>
           </ul>
           <div id="LAY_page1"></div>
         </div>
@@ -129,6 +130,18 @@
     methods:{
       goDetail:function (mission) {
         window.location.href = "../index/detail.html?mid="+mission.mid;
+      },
+      cancelCollect:function (mission) {
+        let self = this;
+        let token = window.localStorage.getItem('token');
+        axios.defaults.baseURL = 'http://localhost:8080/'
+        axios.delete("api/collect", {
+          data:mission,
+          headers: {'Authorization': token}
+        },).then(function (response) {
+          alert('取消收藏成功')
+          window.location.href="index.html"
+        })
       }
     }
   })

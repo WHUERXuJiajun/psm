@@ -11,4 +11,6 @@ public interface CollectionMapper extends JpaRepository<Collection,String> {
     List<Collection> findByPhone(String phone);
 
     List<Collection> findByPhoneAndMid(String phone, Integer mid);
+
+    void deleteByPhoneAndMid(String phone, Integer mid);
 }

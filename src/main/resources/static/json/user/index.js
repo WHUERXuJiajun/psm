@@ -22,6 +22,26 @@ $(document).ready(function () {
         return phone;
     }
 
+    function cancelCollect() {
+        //取消收藏
+        $.ajax({
+            headers: {
+                'Authorization': token//此处放置请求到的用户token
+            },
+            type: "DELETE",
+            url: "/api/collect",
+            async: false,
+            dataType: "json",
+            data: { "mid": mid, "phone": phone },
+            success: function (data) {
+                if (data == true) {
+                    alert("取消收藏成功");
+                } else {
+                    alert("取消收藏失败");
+                }
+            }
+        });
+    }
 
 
     return false;

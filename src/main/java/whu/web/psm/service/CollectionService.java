@@ -27,5 +27,5 @@ public interface CollectionService {
      *
      * @param collection -- 收藏
      */
-    void deleteCollection(Collection collection);
+    void deleteCollection(String phone, Integer mid);
 }

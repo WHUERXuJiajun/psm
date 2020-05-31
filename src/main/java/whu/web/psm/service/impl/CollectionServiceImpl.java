@@ -2,6 +2,7 @@ package whu.web.psm.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import whu.web.psm.dao.CollectionMapper;
 import whu.web.psm.dao.MissionTableMapper;
 import whu.web.psm.pojo.Collection;
@@ -43,9 +44,10 @@ public class CollectionServiceImpl implements CollectionService {
         return true;
     }
 
+    @Transactional
     @Override
-    public void deleteCollection(Collection collection) {
-        collectionMapper.delete(collection);
+    public void deleteCollection(String phone, Integer mid) {
+        collectionMapper.deleteByPhoneAndMid(phone,mid);
     }
 
 

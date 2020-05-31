@@ -48,8 +48,9 @@ public class CollectionController {
             value = "取消收藏",
             notes = "取消收藏"
     )
-    void deleteCollection(@RequestBody Collection collection) {
-        collectionService.deleteCollection(collection);
+    void deleteCollection(@RequestBody MissionTable missionTable, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        collectionService.deleteCollection(principal.getName(),missionTable.getMid());
     }
 
 }
