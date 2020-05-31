@@ -13,10 +13,10 @@ new Vue({
         axios.get("api/MissionTable/orderMissionsByDdl", {
             params: {
                 page: 1,
-                size: 8
+                size: 4
             }
         }).then(function (response) {
-            self.urgent_missions = response.data; 
+            self.urgent_missions = response.data.data;
         })
         //获取搜索的任务（默认先是全部）
         axios.get("api/MissionTable/getMissions_all", {
@@ -25,7 +25,7 @@ new Vue({
                 size: 8
             }
         }).then(function (response) {
-            self.search_missions = response.data;
+            self.search_missions = response.data.data;
         })
          //获取最新的任务
          axios.get("api/MissionTable/orderMissonsByTime", {
@@ -34,7 +34,7 @@ new Vue({
                 size: 8
             }
         }).then(function (response) {
-            self.new_missions = response.data;
+            self.new_missions = response.data.data;
         })
         //获取用户排行
         axios.get("api/user/rank", {
