@@ -100,8 +100,7 @@ public interface UserMapper {
     
     /**
      * 
-     * @description: 查询前num个分数最高的用户
-     * @param num -- 前num个
+     * @description: 按分数降序
      * @return
      */
     List<User> selectTopByScore(Integer num);

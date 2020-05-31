@@ -288,7 +288,7 @@
     select
     <include refid="Base_Column_List" />
     from user
-    order by 'score' DESC
+    order by score DESC
     limit #{num,jdbcType=INTEGER}
   </select>
 </mapper>
