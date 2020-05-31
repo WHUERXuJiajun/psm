@@ -58,14 +58,32 @@ public class MissionTableServicelmpl implements MissionTableService {
     }
 
     @Override
-    public List<MissionTable> selectMissionByLabel(String label, Integer page, Integer size) {
-    	int offset = 0;
+    public Map<String,Object> selectMissionByLabel(String label, Integer page, Integer size) {
+    	Map<String,Object> map = new HashMap<>();
+
+        int offset = 0;
         if(size<=0)
             return null;
         if (page > 0) {
             offset = (page - 1) * size;
         }
-    	return missionTableMapper.selectMissionByLabel(label, size, offset);
+        List<MissionTable> missionTables = missionTableMapper.selectMissionByLabel(label, size, offset);
+        if(missionTables.size()%size==0){
+            map.put("pageNum",missionTables.size()/size);
+        }
+        else{
+            map.put("pageNum",(missionTables.size()/size)+1);
+        }
+        List<MissionTable> missionTables_show=new ArrayList<>();
+        Integer startindex=(page-1)*size;
+        Integer i=0;
+        while(i<size&&(i+startindex)<missionTables.size()){
+            missionTables_show.add(missionTables.get(startindex+i));
+            i++;
+        }
+        map.put("data",missionTables_show);
+        return map;
+
     }
 
     @Override
@@ -114,7 +132,12 @@ public class MissionTableServicelmpl implements MissionTableService {
         MissionTableExample missionTableExample=new MissionTableExample();
         missionTableExample.setOrderByClause("post_time");
         missionTables=missionTableMapper.selectByExample(missionTableExample);
-        map.put("pageNum",missionTables.size());
+        if(missionTables.size()%size==0){
+            map.put("pageNum",missionTables.size()/size);
+        }
+        else{
+            map.put("pageNum",(missionTables.size()/size)+1);
+        }
         List<MissionTable> missionTables_show=new ArrayList<>();
         Integer startindex=(page-1)*size;
         Integer i=0;
@@ -134,7 +157,12 @@ public class MissionTableServicelmpl implements MissionTableService {
         MissionTableExample missionTableExample=new MissionTableExample();
         missionTableExample.setOrderByClause("money");
         missionTables=missionTableMapper.selectByExample(missionTableExample);
-        map.put("pageNum",missionTables.size());
+        if(missionTables.size()%size==0){
+            map.put("pageNum",missionTables.size()/size);
+        }
+        else{
+        map.put("pageNum",(missionTables.size()/size)+1);
+        }
         List<MissionTable> missionTables_show=new ArrayList<>();
         Integer startindex=(page-1)*size;
         Integer i=0;
@@ -154,7 +182,12 @@ public class MissionTableServicelmpl implements MissionTableService {
         MissionTableExample missionTableExample=new MissionTableExample();
         missionTableExample.setOrderByClause("end_time");
         missionTables=missionTableMapper.selectByExample(missionTableExample);
-        map.put("pageNum",missionTables.size());
+        if(missionTables.size()%size==0){
+            map.put("pageNum",missionTables.size()/size);
+        }
+        else{
+            map.put("pageNum",(missionTables.size()/size)+1);
+        }
         List<MissionTable> missionTables_show=new ArrayList<>();
         Integer startindex=(page-1)*size;
         Integer i=0;

@@ -61,9 +61,10 @@ public class MissionTableController {
        @ApiImplicitParam(value = "页号", name = "page",paramType = "query",dataType = "Integer"),
        @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "Integer")
     })
-    public List<MissionTable> getMissionByLabel(@RequestParam("label") String label,
+    public Map<String,Object> getMissionByLabel(@RequestParam(value = "label",defaultValue = "") String label,
 									    		@RequestParam(value = "page",defaultValue = "1") Integer page,
 									            @RequestParam(value = "size",defaultValue = "8")Integer size){
+
         return missionTableService.selectMissionByLabel(label, page, size);
     }
 

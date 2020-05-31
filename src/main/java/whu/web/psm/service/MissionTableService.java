@@ -34,7 +34,7 @@ public interface MissionTableService {
      * @param label -- 标签名
      * @return 任务列表
      */
-    List<MissionTable> selectMissionByLabel(String label, Integer page, Integer size);
+    Map<String,Object> selectMissionByLabel(String label, Integer page, Integer size);
 
 
     /**

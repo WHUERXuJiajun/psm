@@ -449,14 +449,14 @@
     (label1 is not null and label1 = #{label,jdbcType=VARCHAR}) or
     (label2 is not null and label2 = #{label,jdbcType=VARCHAR}) or
     (label3 is not null and label3 = #{label,jdbcType=VARCHAR})
-    <if test="limit != null">
-      <if test="offset != null">
-        limit ${offset}, ${limit}
-      </if>
-      <if test="offset == null">
-        limit ${limit}
-      </if>
-    </if>
+<!--    <if test="limit != null">-->
+<!--      <if test="offset != null">-->
+<!--        limit ${offset}, ${limit}-->
+<!--      </if>-->
+<!--      <if test="offset == null">-->
+<!--        limit ${limit}-->
+<!--      </if>-->
+<!--    </if>-->
   </select>
 
 
