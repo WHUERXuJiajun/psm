@@ -11,4 +11,11 @@ public interface CommentMapper extends JpaRepository<Comment, String> {
 
     @Query(value="select * from comment where mid = :mid order by comment_time ASC",nativeQuery=true)
     List<Comment> selectAllByMid(@Param("mid")Integer mid);
+
+    @Query(value="select * from comment where mid = :mid and to_user = :to_user",nativeQuery=true)
+    List<Comment> findByMidAndTo_user(Integer mid,String to_user);
+
+    @Query(value="select * from comment where to_user = :user",nativeQuery=true)
+    List<Comment> selectByUser(@Param("user")String user);
+
 }

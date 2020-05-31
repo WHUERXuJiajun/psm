@@ -33,4 +33,16 @@ public interface CommentService {
      * @return 评论数
      */
     int getCommentsCount(Integer mid);
+
+    /**
+     * 获取用户收到的评论消息
+     *
+     *
+     * @param user -- 收到评论消息的用户
+     * @return 评论列表
+     */
+    List<Comment> getMessage(String user);
+
+
+
 }
