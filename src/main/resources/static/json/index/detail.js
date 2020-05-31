@@ -62,6 +62,8 @@ $(document).ready(function () {
             $("#money").text('悬赏' + data.mission.money);
             $("#post_time").text(data.mission.postTime);
             $("#poster").text(plusXing(data.phone,3,4,'*'));
+            if(data.mission.state != 0)
+                $('#receiveBtn').attr("disabled", true).css("background","#808080").text('已接受');
         }
     });
 
