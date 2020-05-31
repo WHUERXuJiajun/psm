@@ -312,6 +312,7 @@
       addThumb:function (comment) {
         let self = this;
         let token = window.localStorage.getItem('token');
+        axios.defaults.baseURL = 'http://localhost:8080/';
         axios.put("api/comment/thumb", comment, {
                   headers: {'Authorization': token}
                 }
