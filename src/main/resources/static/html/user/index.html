@@ -73,7 +73,8 @@
             <li v-for="mission in post_missions">
               <a class="jie-title" @click="goDetail(mission)" target="_blank">{{mission.title}}</a>
               <i>{{mission.postTime}}</i>
-              <a class="mine-edit" @click="achieveMission(mission)">确认完成</a>
+              <a v-if="mission.state == 0" class="mine-edit" style="background: #4EBBF9">等待接收</a>
+              <a v-else class="mine-edit" @click="achieveMission(mission)">确认完成</a>
               <!--              <em>661阅/10答</em>-->
             </li>
           </ul>
