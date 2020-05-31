@@ -88,7 +88,9 @@
               <a @click="goHome(message.from_user)" target="_blank"><cite>{{message.from_user}}</cite></a>回复了您<a target="_blank" @click="goDetail(message)"><cite>查看详情</cite></a>:</br></br>
               {{message.content}}
             </blockquote>
-<!--            <p><span>{{message.comment_time}}</span><a href="javascript:;" class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>-->
+            <p><span>{{message.comment_time}}</span>
+<!--              <a href="javascript:;" class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a>-->
+            </p>
           </li>
         </ul>
       </div>

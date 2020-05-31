@@ -5,7 +5,7 @@ $(document).ready(function () {
         var username = $("#L_email").val();
         var password = $("#L_pass").val();
         if (!username) {
-            alert("账号必填!");
+            alert("学号必填!");
             $("#username").focus();//获取焦点
             return;
         }

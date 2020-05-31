@@ -5,7 +5,7 @@ $(function () {
         let password = $("#pwd").val();
         let rePwd = $("#rePwd").val();
         if (!username) {
-            alert("电话必填!");
+            alert("学号必填!");
             $("#username").focus();//获取焦点
             return;
         }
@@ -14,9 +14,9 @@ $(function () {
             $("#password").focus();//获取焦点
             return;
         }
-        //验证手机号码格式
-        if(!(/^1[3456789]\d{9}$/.test(username))){
-            alert("手机号码有误，请重填");
+        //验证学号格式
+        if(!(/^20\d{11}$/.test(username))){
+            alert("学号有误，请重填");
             return false;
         }
         if(password.length < 6){
