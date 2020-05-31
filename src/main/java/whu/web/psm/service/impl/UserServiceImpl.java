@@ -61,6 +61,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUser(String phone) {
+        return userMapper.selectByPrimaryKey(phone);
+    }
+
+    @Override
     public String login(String phone, String pwd) {
         User user = userMapper.selectByPrimaryKey(phone);//使用电话号码获取实体
         if (user.getPwd().equals(pwd)) {
@@ -84,7 +89,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(User user) {
-        int row = userMapper.updateByPrimaryKey(user);
+        User user1 = userMapper.selectByPrimaryKey(user.getPhone());
+        user1.setMotto(user.getMotto());
+        int row = userMapper.updateByPrimaryKey(user1);
         return row == 1;
     }
 

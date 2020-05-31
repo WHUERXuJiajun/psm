@@ -34,9 +34,13 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
-    public void CollectMission(Collection collection) {
+    public boolean CollectMission(Collection collection) {
+        List<Collection> collections = collectionMapper.findByPhoneAndMid(collection.getPhone(),collection.getMid());
+        if(collections.size()>0)
+            return false;
         collection.setId(UUIDUtil.getId());
         collectionMapper.save(collection);
+        return true;
     }
 
     @Override

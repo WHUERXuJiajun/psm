@@ -37,8 +37,8 @@ public class CollectionController {
             value = "收藏任务",
             notes = "收藏任务"
     )
-    void collectMission(@RequestBody Collection collection) {
-        collectionService.CollectMission(collection);
+    boolean collectMission(@RequestBody Collection collection) {
+        return collectionService.CollectMission(collection);
     }
 
 

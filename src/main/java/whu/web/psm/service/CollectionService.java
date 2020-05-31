@@ -20,7 +20,7 @@ public interface CollectionService {
      * 收藏任务
      * @param collection -- 收藏
      */
-    void CollectMission(Collection collection);
+    boolean CollectMission(Collection collection);
 
     /**
      * 删除收藏

@@ -1,27 +1,51 @@
 $(function () {
     let token = window.localStorage.getItem('token');
-    let phone = "";
+    let user = null;
+
+    user = getUser();
 
     $("#headerpage").load("../common/header.html");
 
 
     function getUser(){
-        let token = window.localStorage.getItem('token');
-        let phone = "";
+        token = window.localStorage.getItem('token');
         $.ajax({
             type: "GET",
-            url: "/api/user",//请求程序页面
+            url: "/api/user/user_info",//请求程序页面
             async: false,//当有返回值以后才会进行后面的js程序。
-            dataType: "text",
+            dataType: "json",
             headers:{
                 'Authorization':token//此处放置请求到的用户token
             },
             success: function (data) {
-                phone = data;
+                user = data;
+                $('#L_sign').text(user.motto)
             }
         });
-        return phone;
+        return user;
     }
+
+    //增加座右铭
+    $('#addMottoBtn').click(function () {
+        user = getUser()
+        let motto = $('#L_sign').val();
+        user.motto = motto;
+        $.ajax({
+            type: "PUT",
+            url: "/api/user",//请求程序页面
+            async: false,//当有返回值以后才会进行后面的js程序。
+            dataType: "json",
+            contentType:'application/json;charset=UTF-8',
+            headers:{
+                'Authorization':token//此处放置请求到的用户token
+            },
+            data:JSON.stringify(user),
+            success: function (data) {
+                alert('更新成功')
+            }
+        });
+    })
+
 
     //修改密码
     $("#resetpass").click(function () {
@@ -55,7 +79,7 @@ $(function () {
                 url: "/api/user/updatePwd",
                 async: false,
                 dataType: "json",
-                data: {"phone": phone,"oldPwd":oldPwd,"newPwd":newPwd },
+                data: {"phone": user.phone,"oldPwd":oldPwd,"newPwd":newPwd },
                 success: function(data){
                     alert('密码修改成功');
                 }
@@ -64,19 +88,19 @@ $(function () {
     });
 
     //上传头像
-    $.ajax({
-        header:{
-            'Authorization':token//此处放置请求到的用户token
-        },
-        type: "POST",
-        url: "/api/user/uploadIcon",
-        async: false,
-        dataType: "json",
-        data: { },
-        success: function(data){
-
-        }
-    });
+    // $.ajax({
+    //     header:{
+    //         'Authorization':token//此处放置请求到的用户token
+    //     },
+    //     type: "POST",
+    //     url: "/api/user/uploadIcon",
+    //     async: false,
+    //     dataType: "json",
+    //     data: { },
+    //     success: function(data){
+    //
+    //     }
+    // });
 
 
     return false;

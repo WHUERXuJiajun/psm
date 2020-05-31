@@ -62,20 +62,32 @@ public class UserController {
     @PreAuthorize("hasRole('user')")
     @GetMapping
     @ApiOperation(
-            value = "获取用户信息",
+            value = "获取用户电话",
             notes = "输入token，返回用户的电话"
     )
     public String getUserByPhone(HttpServletRequest request){
         Principal principal = request.getUserPrincipal();
         return principal.getName();
     }
+
+
+    @PreAuthorize("hasRole('user')")
+    @GetMapping(value = "/user_info")
+    @ApiOperation(
+            value = "获取用户全部信息",
+            notes = "输入token，返回用户"
+    )
+    public User getUser(HttpServletRequest request){
+        Principal principal = request.getUserPrincipal();
+        return userService.getUser(principal.getName());
+    }
     
     
     @PreAuthorize("hasRole('user')")
     @PutMapping
     @ApiOperation(
-            value = "更新用户",
-            notes = "输入用户，根据用户id更新用户信息"
+            value = "更新用户motto",
+            notes = "输入用户，根据用户id更新用户motto"
     )
     public boolean updateUser(@RequestBody User user){
         return userService.updateUser(user);

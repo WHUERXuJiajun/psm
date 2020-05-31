@@ -16,8 +16,8 @@ public class ReceServiceImplTest {
     @Autowired
     private ReceServiceImpl receService;
 
-    String phone = "15387315836";
-    int mid = 4;
+    String phone = "17371447819";
+    int mid = 20;
 
     @Test
     public void insertRece() {
@@ -43,7 +43,7 @@ public class ReceServiceImplTest {
         boolean res;
         ReceKey receKey = new ReceKey();
         receKey.setPhone(phone);
-        receKey.setMid(8);
+        receKey.setMid(20);
         res = receService.cancelMission(receKey);
         assertTrue(res);
         res = receService.cancelMission(receKey);

@@ -28,7 +28,10 @@ public interface UserService {
 	 */
 	boolean register(String phone, String pwd);
 	
-	
+
+	User getUser(String phone);
+
+
 	/**
 	 * 
 	 * @description: 登陆账户

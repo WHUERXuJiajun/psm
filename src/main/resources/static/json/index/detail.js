@@ -68,8 +68,8 @@ $(document).ready(function () {
 
 
     $("#collectBtn").click(function () {
-        phone = getUser();
         //收藏任务
+        let phone = getUser();
         $.ajax({
             headers: {
                 'Authorization': token//此处放置请求到的用户token
@@ -81,7 +81,11 @@ $(document).ready(function () {
             dataType: "json",
             data: JSON.stringify({ "mid": mid, "phone": phone }),
             success: function (data) {
-                alert('收藏成功！')
+                if (data == true) {
+                    alert("收藏成功");
+                } else {
+                    alert("已收藏");
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 /*错误信息处理*/
@@ -132,13 +136,13 @@ $(document).ready(function () {
                 if (data == true) {
                     alert("接受任务成功");
                 } else {
-                    alert("接受任务失败");
+                    alert("已接受");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 /*错误信息处理*/
-                //alert('请先登录！');
-                //window.location.href="login.html"
+                alert('请先登录！');
+                window.location.href="login.html"
             }
         });
     })
