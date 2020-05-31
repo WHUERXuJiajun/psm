@@ -99,7 +99,6 @@ public class MissionTableServicelmpl implements MissionTableService {
 
     @Override
     public boolean mission_cancel(Integer mid){
-        MissionTable missionTable=new MissionTable();
         String phone = receMapper.getPhoneByMid(mid);
         User user = userMapper.selectByPrimaryKey(phone);
         if(user.getCredit() < 100)
