@@ -38,12 +38,13 @@ public class CommentController {
         return commentService.getCommentsCount(mid);
     }
 
-    @GetMapping(value = "/user/{user}")
+    @GetMapping(value = "/user")
     @ApiOperation(
             value = "根据用户名获取收到的评论"
     )
-    List<Comment> getMessage(@PathVariable String user) {
-        return commentService.getMessage(user);
+    List<Comment> getMessage(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        return commentService.getMessage(principal.getName());
     }
 
     @PreAuthorize("hasRole('user')")

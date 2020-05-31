@@ -12,6 +12,8 @@
 </head>
 <body>
 
+<div id="headerpage"></div>
+
   <div class="fly-panel fly-column">
     <div class="layui-container">
       <ul class="layui-clear">
@@ -35,32 +37,6 @@
 </div>
 
 
-<div class="fly-header layui-bg-black">
-  <div class="layui-container">
-    <a class="fly-logo" href="../index/index.html">
-      <img src="../../res/images/logo.png" alt="layui">
-    </a>
-    
-    <ul class="layui-nav fly-nav-user">
-      <!-- 登入后的状态 -->
-      <li class="layui-nav-item">
-        <a class="fly-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">贤心</cite>
-          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-          <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
-          <dd><a href="" style="text-align: center;">退出</a></dd>
-        </dl>
-      </li>
-    </ul>
-  </div>
-</div>
 
 <div class="layui-container fly-marginTop fly-user-main">
   <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
@@ -101,18 +77,18 @@
   <div class="site-mobile-shade"></div>
   
   
-  <div class="fly-panel fly-panel-user" pad20>
+  <div id="message" class="fly-panel fly-panel-user" pad20>
 	  <div class="layui-tab layui-tab-brief" lay-filter="user" id="LAY_msg" style="margin-top: 15px;">
-	    <button class="layui-btn layui-btn-danger" id="LAY_delallmsg">清空全部消息</button>
+<!--	    <button class="layui-btn layui-btn-danger" id="LAY_delallmsg">清空全部消息</button>-->
 	    <div  id="LAY_minemsg" style="margin-top: 10px;">
         <!--<div class="fly-none">您暂时没有最新消息</div>-->
         <ul class="mine-msg">
-          <li data-id="123">
+          <li v-for="message in messages">
             <blockquote class="layui-elem-quote">
-              <a href="/jump?username=Absolutely" target="_blank"><cite>Absolutely</cite></a>回复了您的任务<a target="_blank" href="/jie/8153.html/page/0/#item-1489505778669"><cite>求开发学生管理系统</cite></a>:</br></br>
-              &nbsp价格怎样
+              <a @click="goHome(message.from_user)" target="_blank"><cite>{{message.from_user}}</cite></a>回复了您<a target="_blank" @click="goDetail(message)"><cite>查看详情</cite></a>:</br></br>
+              {{message.content}}
             </blockquote>
-            <p><span>1小时前</span><a href="javascript:;" class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>
+<!--            <p><span>{{message.comment_time}}</span><a href="javascript:;" class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>-->
           </li>
         </ul>
       </div>
@@ -129,6 +105,16 @@
 </div>
 
 <script src="../../res/layui/layui.js"></script>
+<script src="../../json/jquery.min.js"></script>
+<script>
+  $(function(){
+    //公共部分导航栏
+    $("#headerpage").load("../common/header.html");
+  });
+</script>
+<script src="../../json/vue.min.js"></script>
+<script src="../../json/axios.min.js"></script>
+<script src="../../json/user/message.js"></script>
 <script>
 layui.cache.page = 'user';
 layui.cache.user = {
