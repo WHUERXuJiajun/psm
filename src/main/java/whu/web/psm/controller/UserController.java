@@ -60,6 +60,19 @@ public class UserController {
     }
 
 
+    @GetMapping(value = "/phone")
+    @ApiOperation(
+            value = "根据电话号码获取用户信息",
+            notes = "输入电话获取用户全部信息"
+    )
+    @ApiImplicitParam(value = "电话", name = "phone",paramType = "query",dataType = "String")
+
+    public User login(@RequestParam("phone") String phone){
+        return userService.getUser(phone);
+    }
+
+
+
     @PreAuthorize("hasRole('user')")
     @GetMapping
     @ApiOperation(
