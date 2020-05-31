@@ -134,7 +134,7 @@ public class MissionTableController {
             @ApiImplicitParam(value = "页号", name = "page",paramType = "query",dataType = "Integer"),
             @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "Integer")
     })
-    public List<MissionTable> orderMissionsByTime(
+    public Map<String,Object> orderMissionsByTime(
             @RequestParam(value = "page",defaultValue = "1") Integer page,
             @RequestParam(value = "size",defaultValue = "8")Integer size){
         return missionTableService.selectMissionByTime(page,size);
@@ -149,7 +149,7 @@ public class MissionTableController {
             @ApiImplicitParam(value = "页号", name = "page",paramType = "query",dataType = "Integer"),
             @ApiImplicitParam(value = "每页数量", name = "size",paramType = "query",dataType = "Integer")
     })
-    public List<MissionTable> orderMissionsByMoney(
+    public Map<String,Object> orderMissionsByMoney(
             @RequestParam(value = "page",defaultValue = "1") Integer page,
             @RequestParam(value = "size",defaultValue = "8")Integer size){
         return missionTableService.selectMissionByMoney(page,size);
@@ -161,7 +161,7 @@ public class MissionTableController {
             value = "根据截止时间排序",
             notes = "获取任务，并根据时间排序"
     )
-    public List<MissionTable> orderMissionsByDdl(
+    public Map<String,Object> orderMissionsByDdl(
             @RequestParam(value = "page",defaultValue = "1") Integer page,
             @RequestParam(value = "size",defaultValue = "8")Integer size){
         return missionTableService.selectMissionByDdl(page,size);

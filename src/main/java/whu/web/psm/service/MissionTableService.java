@@ -74,19 +74,19 @@ public interface MissionTableService {
      * @description: 根据发布时间排序,并分页
      * @return
      */
-    List<MissionTable> selectMissionByTime(Integer page,Integer size);
+    Map<String,Object> selectMissionByTime(Integer page,Integer size);
 
     /**
      *
      * @description: 根据酬金排序，并分页
      * @return
      */
-    List<MissionTable> selectMissionByMoney(Integer page,Integer size);
+    Map<String,Object> selectMissionByMoney(Integer page,Integer size);
 
     /**
      *
      * @description: 根据截止时间排序，并分页
      * @return
      */
-    List<MissionTable> selectMissionByDdl(Integer page,Integer size);
+    Map<String,Object> selectMissionByDdl(Integer page,Integer size);
 }

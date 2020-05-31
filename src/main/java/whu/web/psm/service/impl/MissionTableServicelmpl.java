@@ -107,12 +107,14 @@ public class MissionTableServicelmpl implements MissionTableService {
     }
 
     @Override
-    public List<MissionTable> selectMissionByTime(Integer page,Integer size){
+    public Map<String,Object>  selectMissionByTime(Integer page,Integer size){
         /*这里采用查询后由后台处理分页事务的方式*/
+        Map<String,Object> map = new HashMap<>();
         List<MissionTable> missionTables=new ArrayList<>();
         MissionTableExample missionTableExample=new MissionTableExample();
         missionTableExample.setOrderByClause("post_time");
         missionTables=missionTableMapper.selectByExample(missionTableExample);
+        map.put("pageNum",missionTables.size());
         List<MissionTable> missionTables_show=new ArrayList<>();
         Integer startindex=(page-1)*size;
         Integer i=0;
@@ -120,16 +122,19 @@ public class MissionTableServicelmpl implements MissionTableService {
             missionTables_show.add(missionTables.get(startindex+i));
             i++;
         }
-        return missionTables_show;
+        map.put("data",missionTables_show);
+        return map;
     }
 
     @Override
-    public List<MissionTable> selectMissionByMoney(Integer page,Integer size){
+    public Map<String,Object> selectMissionByMoney(Integer page,Integer size){
         /*这里采用查询后由后台处理分页事务的方式*/
+        Map<String,Object> map = new HashMap<>();
         List<MissionTable> missionTables=new ArrayList<>();
         MissionTableExample missionTableExample=new MissionTableExample();
         missionTableExample.setOrderByClause("money");
         missionTables=missionTableMapper.selectByExample(missionTableExample);
+        map.put("pageNum",missionTables.size());
         List<MissionTable> missionTables_show=new ArrayList<>();
         Integer startindex=(page-1)*size;
         Integer i=0;
@@ -137,16 +142,19 @@ public class MissionTableServicelmpl implements MissionTableService {
             missionTables_show.add(missionTables.get(startindex+i));
             i++;
         }
-        return missionTables_show;
+        map.put("data",missionTables_show);
+        return map;
     }
 
     @Override
-    public List<MissionTable> selectMissionByDdl(Integer page,Integer size){
+    public Map<String,Object> selectMissionByDdl(Integer page,Integer size){
         /*这里采用查询后由后台处理分页事务的方式*/
+        Map<String,Object> map = new HashMap<>();
         List<MissionTable> missionTables=new ArrayList<>();
         MissionTableExample missionTableExample=new MissionTableExample();
         missionTableExample.setOrderByClause("end_time");
         missionTables=missionTableMapper.selectByExample(missionTableExample);
+        map.put("pageNum",missionTables.size());
         List<MissionTable> missionTables_show=new ArrayList<>();
         Integer startindex=(page-1)*size;
         Integer i=0;
@@ -154,7 +162,8 @@ public class MissionTableServicelmpl implements MissionTableService {
             missionTables_show.add(missionTables.get(startindex+i));
             i++;
         }
-        return missionTables_show;
+        map.put("data",missionTables_show);
+        return map;
     }
 
 }
