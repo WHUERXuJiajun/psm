@@ -63,6 +63,7 @@
     <div class="layui-tab layui-tab-brief" lay-filter="user">
       <ul class="layui-tab-title" id="LAY_mine">
         <li data-type="mine-jie" lay-id="index" class="layui-this">我发布的任务</li>
+        <li data-type="collection" data-url="/collection/find/" lay-id="accept">我接收的任务</li>
         <li data-type="collection" data-url="/collection/find/" lay-id="collection">我关注的任务</li>
       </ul>
       <div class="layui-tab-content" style="padding: 20px 0;" id="index">
@@ -71,10 +72,19 @@
             <li v-for="mission in post_missions">
               <a class="jie-title" @click="goDetail(mission)" target="_blank">{{mission.title}}</a>
               <i>{{mission.postTime}}</i>
-<!--              <em>661阅/10答</em>-->
+              <a class="mine-edit" @click="achieveMission(mission)">确认完成</a>
+              <!--              <em>661阅/10答</em>-->
             </li>
           </ul>
           <div id="LAY_page"></div>
+        </div>
+        <div class="layui-tab-item">
+          <ul class="mine-view jie-row">
+            <li v-for="mission in accept_missions">
+              <a class="jie-title" @click="goDetail(mission)" target="_blank">{{mission.title}}</a>
+              <a class="mine-edit" @click="cancelAccept(mission)">取消</a>
+          </ul>
+          <div id="LAY_page2"></div>
         </div>
         <div class="layui-tab-item">
           <ul class="mine-view jie-row">
@@ -84,6 +94,7 @@
           </ul>
           <div id="LAY_page1"></div>
         </div>
+
       </div>
     </div>
   </div>
@@ -106,7 +117,8 @@
     el: '#index',
     data: {
       post_missions:[],
-      collect_missions:[]
+      collect_missions:[],
+      accept_missions:[]
     },
     mounted() {
       let self = this;
@@ -126,6 +138,15 @@
       }).then(function (response) {
         self.collect_missions = response.data; //此时还是字符串
       })
+
+
+      axios.defaults.baseURL = 'http://localhost:8080/'
+      axios.get("api/Rece", {
+        params:{},
+        headers: {'Authorization': token}
+      }).then(function (response) {
+        self.accept_missions = response.data; //此时还是字符串
+      })
     },
     methods:{
       goDetail:function (mission) {
@@ -140,6 +161,21 @@
           headers: {'Authorization': token}
         },).then(function (response) {
           alert('取消收藏成功')
+          window.location.href="index.html"
+        })
+      },
+      achieveMission:function (mission) {
+
+      },
+      cancelAccept:function (mission) {
+        let self = this;
+        let token = window.localStorage.getItem('token');
+        axios.defaults.baseURL = 'http://localhost:8080/'
+        axios.delete("api/Rece", {
+          data:mission,
+          headers: {'Authorization': token}
+        },).then(function (response) {
+          alert('取消接收成功')
           window.location.href="index.html"
         })
       }

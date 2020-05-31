@@ -1,5 +1,6 @@
 package whu.web.psm.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import io.swagger.annotations.ApiOperation;
 import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.pojo.ReceKey;
 import whu.web.psm.service.ReceService;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("api/Rece")
@@ -44,8 +47,9 @@ public class ReceController {
             value = "根据用户的电话，获取用户接受的任务",
             notes = "根据用户的电话，获取用户接受的任务"
     )
-    public List<MissionTable> acceptMission(@RequestParam String phone){
-        return receService.getMissionsByPhone(phone);
+    public List<MissionTable> acceptMission(HttpServletRequest request){
+        Principal principal = request.getUserPrincipal();
+        return receService.getMissionsByPhone(principal.getName());
     }
 	
 	
@@ -56,7 +60,11 @@ public class ReceController {
             value = "取消接收的任务",
             notes = "取消接收的任务"
     )
-    public boolean cancelMission(@RequestBody ReceKey receKey){
+    public boolean cancelMission(@RequestBody MissionTable missionTable,HttpServletRequest request){
+	    Principal principal = request.getUserPrincipal();
+	    ReceKey receKey = new ReceKey();
+	    receKey.setMid(missionTable.getMid());
+	    receKey.setPhone(principal.getName());
         return receService.cancelMission(receKey);
     }
 	
