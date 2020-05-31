@@ -5,6 +5,7 @@
     <title>求开发学生管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="fly,layui,前端社区">
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
     <link rel="stylesheet" href="../../res/layui/css/layui.css">
     <link rel="stylesheet" href="../../res/css/global.css">
@@ -30,7 +31,7 @@
         </ul>
 
         <div class="fly-column-right layui-hide-xs">
-            <span class="fly-search"><i class="layui-icon"></i></span>
+<!--            <span class="fly-search"><i class="layui-icon"></i></span>-->
             <a href="../user/add.html" class="layui-btn">发表任务</a>
         </div>
         <div class="layui-hide-sm layui-show-xs-block"
@@ -62,9 +63,9 @@
                     <span class="fly-mid"></span>
                     <a @click="getMissionByLabel('其他')">其他</a>
                     <span class="fly-filter-right layui-hide-xs">
-            <a href="" class="layui-this">按最新</a>
-            <span class="fly-mid"></span>
-            <a href="">按热议</a>
+<!--            <a href="" class="layui-this">按最新</a>-->
+<!--            <span class="fly-mid"></span>-->
+<!--            <a href="">按热议</a>-->
           </span>
                 </div>
 
@@ -296,10 +297,7 @@
 
                 <div style="text-align: center">
                     <div class="laypage-main">
-                        <a v-for="i in pageNum" @click="">i</a>
-                        <span v-if="pageNum > 10">…</span>
-                        <a href="/jie/page/148/" class="laypage-last" title="尾页">尾页</a>
-                        <a href="/jie/page/2/" class="laypage-next">下一页</a>
+                        <a v-for="i in pageNum" @click="selectPage(i)">{{i}}</a>
                     </div>
                 </div>
 
@@ -406,13 +404,15 @@
         el: '#task',
         data: {
             missions: [],
-            pageNum:1
+            pageNum:1,
+            label:""
         },
         mounted() {
             let self = this;
             axios.defaults.baseURL = 'http://localhost:8080/'
-            axios.get("api/MissionTable/getMissions_all", {
+            axios.get("api/MissionTable/getMissions_label", {
                 params: {
+                    label:"",
                     page: 1,
                     size: 8
                 }
@@ -424,10 +424,11 @@
         methods:{
           getMissionByLabel:function (label) {
             let self = this;
+            self.label = label
             axios.defaults.baseURL = 'http://localhost:8080/'
             axios.get("api/MissionTable/getMissions_label", {
               params: {
-                label:label,
+                label:self.label,
                 page: 1,
                 size: 8
               }
@@ -438,6 +439,20 @@
           },
             goDetail:function (mission) {
                 window.location.href = "detail.html?mid="+mission.mid;
+            },
+            selectPage:function (i) {
+                let self = this;
+                axios.defaults.baseURL = 'http://localhost:8080/'
+                axios.get("api/MissionTable/getMissions_label", {
+                    params: {
+                        label: self.label,
+                        page: i,
+                        size: 8
+                    }
+                }).then(function (response) {
+                    self.missions = response.data.data;
+                    self.pageNum = response.data.pageNum;
+                })
             }
         }
     })

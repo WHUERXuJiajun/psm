@@ -19,8 +19,9 @@ new Vue({
             self.urgent_missions = response.data.data;
         })
         //获取搜索的任务（默认先是全部）
-        axios.get("api/MissionTable/getMissions_all", {
+        axios.get("api/MissionTable/getMissions_label", {
             params: {
+                label:"",
                 page: 1,
                 size: 8
             }
