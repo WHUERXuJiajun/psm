@@ -87,8 +87,8 @@ public class MissionTableController {
 
     @GetMapping(value="/mission_cancel")
     @ApiOperation(
-            value = "撤销任务",
-            notes = "根据mid删除任务"
+            value = "完成任务",
+            notes = "根据mid删除任务，并奖励"
     )
     @ApiImplicitParams({
 

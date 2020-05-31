@@ -170,7 +170,7 @@
         let token = window.localStorage.getItem('token');
         axios.defaults.baseURL = 'http://localhost:8080/'
         axios.get("/api/MissionTable/mission_cancel", {
-          params:mission.mid,
+          params:{"mid":mission.mid},
           headers: {'Authorization': token}
         },).then(function (response) {
           alert('此任务已经完成，对方信誉分+1，分数+1')

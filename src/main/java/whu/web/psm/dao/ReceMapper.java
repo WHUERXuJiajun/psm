@@ -74,4 +74,6 @@ public interface ReceMapper {
     int updateByExample(@Param("record") ReceKey record, @Param("example") ReceExample example);
 
     List<Integer> getMidByPhone(String phone);
+
+    String getPhoneByMid(Integer mid);
 }

@@ -11,11 +11,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import whu.web.psm.dao.MissionTableElasticSearchMapper;
-import whu.web.psm.dao.MissionTableMapper;
-import whu.web.psm.dao.PostMapper;
+import whu.web.psm.dao.*;
 import whu.web.psm.pojo.MissionTable;
 import whu.web.psm.pojo.MissionTableExample;
+import whu.web.psm.pojo.User;
 import whu.web.psm.service.MissionTableService;
 
 /**
@@ -35,6 +34,12 @@ public class MissionTableServicelmpl implements MissionTableService {
 
     @Autowired
     PostMapper postMapper;
+
+    @Autowired
+    ReceMapper receMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public List<MissionTable> getMissions_all(Integer page, Integer size) {
@@ -95,6 +100,12 @@ public class MissionTableServicelmpl implements MissionTableService {
     @Override
     public boolean mission_cancel(Integer mid){
         MissionTable missionTable=new MissionTable();
+        String phone = receMapper.getPhoneByMid(mid);
+        User user = userMapper.selectByPrimaryKey(phone);
+        if(user.getCredit() < 100)
+            user.setCredit(user.getCredit()+1);
+        user.setScore(user.getScore()+1);
+        userMapper.updateByPrimaryKey(user);
         try{
             /*根据mid删除条目*/
             missionTableMapper.deleteByPrimaryKey(mid);

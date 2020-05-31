@@ -198,4 +198,10 @@
     where phone = #{phone,jdbcType=VARCHAR}
   </select>
 
+
+  <select id="getPhoneByMid" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select phone from rece
+    where mid = #{mid,jdbcType=INTEGER}
+  </select>
+
 </mapper>
