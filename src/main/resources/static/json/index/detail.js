@@ -103,6 +103,11 @@ $(document).ready(function () {
 
     $("#receiveBtn").click(function () {
         phone = getUser();
+        if(post_phone == phone){
+            alert('不能接受自己发布的任务')
+            return ;
+        }
+
         //接受任务
         $.ajax({
             headers: {
