@@ -29,6 +29,15 @@ public class CommentController {
         return commentService.getCommentsByMid(mid);
     }
 
+    @GetMapping(value = "/count/{mid}")
+    @ApiOperation(
+            value = "根据任务id获取评论数量"
+    )
+    int getCommentsCount(@PathVariable Integer mid) {
+
+        return commentService.getCommentsCount(mid);
+    }
+
 
     @PreAuthorize("hasRole('user')")
     @PostMapping

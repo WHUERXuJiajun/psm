@@ -39,4 +39,9 @@ public class CommentServiceImpl implements CommentService {
     public void updateComment(Comment comment) {
         commentMapper.save(comment);
     }
+
+    @Override
+    public int getCommentsCount(Integer mid){
+        return commentMapper.selectAllByMid(mid).size();
+    }
 }

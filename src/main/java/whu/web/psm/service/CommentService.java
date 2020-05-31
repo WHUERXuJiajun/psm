@@ -25,4 +25,12 @@ public interface CommentService {
      * @param comment
      */
     void updateComment(Comment comment);
+
+    /**
+     * 根据任务id获取评论数
+     *
+     * @param mid -- 任务id
+     * @return 评论数
+     */
+    int getCommentsCount(Integer mid);
 }
