@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
     public boolean register(String phone, String pwd) {
         try {
             User user = new User();
+            user.setIcon("https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg");
             user.setPhone(phone);
             user.setPwd(pwd);
             user.setCredit(100.0);//信誉分默认100

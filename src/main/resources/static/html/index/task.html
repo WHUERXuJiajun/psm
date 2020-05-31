@@ -42,8 +42,8 @@
 </div>
 
 <div class="layui-container">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md8" id="task">
+    <div class="layui-row layui-col-space15" id="task">
+        <div class="layui-col-md8" >
             <div class="fly-panel" style="margin-bottom: 0;">
 
                 <div class="fly-panel-title fly-filter">
@@ -72,7 +72,7 @@
                 <ul class="fly-list">
                     <li v-for="mission in missions">
                         <a href="../user/home.html" class="fly-avatar">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
+                            <img src="../../res/images/mission.jpg"
                                  alt="贤心">
                         </a>
                         <h2>
@@ -92,7 +92,7 @@
                             <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">金额 {{mission.money}}</span>
                             <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
                             <span class="fly-list-nums">
-                <i class="iconfont icon-pinglun1" title="回答"></i> 66
+<!--                <i class="iconfont icon-pinglun1" title="回答"></i> 66-->
               </span>
                         </div>
                         <div class="fly-list-badge">
@@ -305,57 +305,18 @@
         </div>
         <div class="layui-col-md4">
             <dl class="fly-panel fly-list-one">
-                <dt class="fly-panel-title">本周热议</dt>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                <dt class="fly-panel-title">金额排行榜</dt>
+                <dd v-for="mission in money_missions">
+                    <a @click="goDetail(mission)">{{mission.title}}</a>
                 </dd>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="">求开发学生管理系统</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-
-                <!-- 无数据时 -->
-                <!--
-                <div class="fly-none">没有相关数据</div>
-                -->
             </dl>
 
             <div class="fly-panel">
                 <div class="fly-panel-title">
                     这里可作为广告区域
+                </div>
+                <div class="fly-panel-main">
+                    <a href="" target="_blank" class="fly-zanzhu" style="background-color: #393D49;">虚席以待</a>
                 </div>
             </div>
 
@@ -390,7 +351,6 @@
 
 <script src="../../res/layui/layui.js"></script>
 <script src="../../json/jquery.min.js"></script>
-<script src="../../json/index/task.js"></script>
 <script>
     $(function(){
         //公共部分导航栏
@@ -405,7 +365,8 @@
         data: {
             missions: [],
             pageNum:1,
-            label:""
+            label:"",
+            money_missions:[]
         },
         mounted() {
             let self = this;
@@ -418,7 +379,16 @@
                 }
             }).then(function (response) {
                 self.missions = response.data.data;
-                self.pageNum = response.data.pageNum;
+            })
+
+            axios.get("/api/MissionTable/orderMissionsByMoney", {
+                params: {
+                    page: 1,
+                    size: 8
+                }
+            }).then(function (response) {
+                self.money_missions = response.data.data;
+                console.log(self.money_missions)
             })
         },
         methods:{

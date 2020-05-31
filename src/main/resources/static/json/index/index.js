@@ -4,6 +4,7 @@ new Vue({
         urgent_missions: [],
         search_missions:[],
         new_missions:[],
+        money_missions:[],
         users:[]
     },
     mounted() {
@@ -47,6 +48,15 @@ new Vue({
             for(let i = 0; i < self.users.length; i++){
                 self.users[i].username = self.plusXing(self.users[i].phone,3,4,'*');
             }
+        })
+        axios.get("/api/MissionTable/orderMissionsByMoney", {
+            params: {
+                page: 1,
+                size: 8
+            }
+        }).then(function (response) {
+            self.money_missions = response.data.data;
+            console.log(self.money_missions)
         })
     },
     methods:{

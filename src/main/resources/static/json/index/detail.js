@@ -68,6 +68,20 @@ $(document).ready(function () {
     });
 
 
+    $.ajax({
+        headers: {
+            'Authorization': token//此处放置请求到的用户token
+        },
+        type: "GET",
+        url: "/api/comment/count/"+mid,
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            $('#commentNum').text(data)
+        }
+    });
+
+
 
     $("#collectBtn").click(function () {
         //收藏任务

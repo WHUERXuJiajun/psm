@@ -138,12 +138,9 @@ public class UserController {
             value = "上传头像",
             notes = "上传头像"
     )
-    @ApiImplicitParams({
-            @ApiImplicitParam(value = "电话", name = "phone",paramType = "query",dataType = "String",required = true)
-    })
-    public boolean uploadIcon(@RequestParam(value = "icon") MultipartFile icon,
-                           @RequestParam(value = "phone") String phone) throws IOException {
-        return userService.uploadIcon(icon, phone);
+    public boolean uploadIcon(@RequestParam(value = "icon") MultipartFile icon,HttpServletRequest request) throws IOException {
+        Principal principal = request.getUserPrincipal();
+        return userService.uploadIcon(icon, principal.getName());
     }
     
 }

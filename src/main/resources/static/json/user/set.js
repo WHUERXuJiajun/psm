@@ -20,6 +20,7 @@ $(function () {
             success: function (data) {
                 user = data;
                 $('#L_sign').text(user.motto)
+                $('#icon').attr("src",user.icon)
             }
         });
         return user;
@@ -88,19 +89,27 @@ $(function () {
     });
 
     //上传头像
-    // $.ajax({
-    //     header:{
-    //         'Authorization':token//此处放置请求到的用户token
-    //     },
-    //     type: "POST",
-    //     url: "/api/user/uploadIcon",
-    //     async: false,
-    //     dataType: "json",
-    //     data: { },
-    //     success: function(data){
-    //
-    //     }
-    // });
+    $('#uploadForm').submit(function () {
+        let formData = new FormData();
+        let file = $('#_icon')[0];
+        formData.append("icon", file);
+        $.ajax({
+            headers:{
+                'Authorization':token//此处放置请求到的用户token
+            },
+            type: "POST",
+            url: "/api/user/uploadIcon",
+            data: formData,
+            // dataType: "json",
+            cache: false,//上传文件无需缓存
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须*/
+            success: function(data){
+                alert('上传成功')
+                user = getUser()
+            }
+        });
+    })
 
 
     return false;

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    let phone = "";
+    let user = null;
 
     let token = window.localStorage.getItem('token');
     $('#d_1').css({"display": "none"});
@@ -8,19 +8,21 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
-        url: "/api/user",//请求程序页面
+        url: "/api/user/user_info",//请求程序页面
         async: false,//当有返回值以后才会进行后面的js程序。
-        dataType: "text",
+        dataType: "json",
         headers: {
             'Authorization': token//此处放置请求到的用户token
         },
         success: function (data) {
-            phone = data;
+            user = data;
+            console.log(user)
             $('#w_1').css({"display": "none"});
             $('#w_2').css({"display": "none"});
             $('#w_3').css({"display": "none"});
             $('#d_1').css({"display": "inline"});
-            $('#user').text(plusXing(phone,3,4,"*"))
+            $('#user').text(plusXing(user.phone,3,4,"*"))
+            $('#_icon').attr("src",user.icon)
         }
     });
 
