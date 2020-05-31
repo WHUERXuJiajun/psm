@@ -117,6 +117,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == true) {
                     alert("接受任务成功");
+                    window.location.href="detail.html?mid="+mid;
                 } else {
                     alert("已接受");
                 }
