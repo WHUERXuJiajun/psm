@@ -111,7 +111,9 @@ $(function () {
         });
     })
 
-
+    $('#goHome').click(function () {
+        window.location.href = "home.html?phone="+user.phone;
+    })
     return false;
 
 

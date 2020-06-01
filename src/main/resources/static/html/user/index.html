@@ -19,7 +19,7 @@
 <div class="layui-container fly-marginTop fly-user-main">
   <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
     <li class="layui-nav-item">
-      <a href="home.html">
+      <a id="goHome">
         <i class="layui-icon">&#xe609;</i>
         我的主页
       </a>
@@ -115,87 +115,10 @@
 <script src="../../json/vue.min.js"></script>
 <script src="../../json/axios.min.js"></script>
 <script src="../../json/user/index.js"></script>
+<script src="../../json/user/index_vue.js"></script>
+
 <script>
-  new Vue({
-    el: '#index',
-    data: {
-      post_missions:[],
-      collect_missions:[],
-      accept_missions:[]
-    },
-    mounted() {
-      let self = this;
-      let token = window.localStorage.getItem('token');
-      axios.defaults.baseURL = 'http://localhost:8080/'
-      axios.get("api/post/getMissionsByPhone", {
-        params:{},
-        headers: {'Authorization': token}
-      }).then(function (response) {
-        self.post_missions = response.data; //此时还是字符串
-      })
 
-      axios.defaults.baseURL = 'http://localhost:8080/'
-      axios.get("api/collect", {
-        params:{},
-        headers: {'Authorization': token}
-      }).then(function (response) {
-        self.collect_missions = response.data; //此时还是字符串
-      })
-
-
-      axios.defaults.baseURL = 'http://localhost:8080/'
-      axios.get("api/Rece", {
-        params:{},
-        headers: {'Authorization': token}
-      }).then(function (response) {
-        self.accept_missions = response.data; //此时还是字符串
-      })
-    },
-    methods:{
-      goDetail:function (mission) {
-        window.location.href = "../index/detail.html?mid="+mission.mid;
-      },
-      cancelCollect:function (mission) {
-        let self = this;
-        let token = window.localStorage.getItem('token');
-        axios.defaults.baseURL = 'http://localhost:8080/'
-        axios.delete("api/collect", {
-          data:mission,
-          headers: {'Authorization': token}
-        },).then(function (response) {
-          alert('取消收藏成功')
-          window.location.href="index.html"
-        })
-      },
-      achieveMission:function (mission) {
-        let self = this;
-        let token = window.localStorage.getItem('token');
-        axios.defaults.baseURL = 'http://localhost:8080/'
-        axios.get("/api/MissionTable/mission_cancel", {
-          params:{"mid":mission.mid},
-          headers: {'Authorization': token}
-        },).then(function (response) {
-          alert('此任务已经完成，对方信誉分+1，分数+1')
-          window.location.href="index.html"
-        })
-      },
-      cancelAccept:function (mission) {
-        let self = this;
-        let token = window.localStorage.getItem('token');
-        axios.defaults.baseURL = 'http://localhost:8080/'
-        axios.delete("api/Rece", {
-          data:mission,
-          headers: {'Authorization': token}
-        },).then(function (response) {
-          alert('取消接收成功')
-          window.location.href="index.html"
-        })
-      },
-      deadMission:function (mission) {
-
-      }
-    }
-  })
 </script>
 <script>
 layui.cache.page = 'user';

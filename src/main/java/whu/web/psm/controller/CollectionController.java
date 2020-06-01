@@ -20,15 +20,13 @@ public class CollectionController {
     @Autowired
     CollectionService collectionService;
 
-    @PreAuthorize("hasRole('user')")
     @GetMapping
     @ApiOperation(
             value = "根据用户电话获取收藏的任务",
             notes = "根据用户电话获取收藏的任务"
     )
-    List<MissionTable> getCollectMissionsByPhone(HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        return collectionService.getCollectMissionsByPhone(principal.getName());
+    List<MissionTable> getCollectMissionsByPhone(String phone) {
+        return collectionService.getCollectMissionsByPhone(phone);
     }
 
     @PreAuthorize("hasRole('user')")

@@ -45,6 +45,11 @@ $(document).ready(function () {
         })
     })
 
+    
+    $('#goHome').click(function () {
+        window.location.href = "../user/home.html?phone="+user.phone;
+    })
+
 
     /* 电话号码部分隐藏处理
     ** str 需要处理的字符串

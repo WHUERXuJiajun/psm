@@ -44,5 +44,10 @@ $(document).ready(function () {
     }
 
 
+    $('#goHome').click(function () {
+        window.location.href = "home.html?phone="+phone;
+    })
+
+
     return false;
 });

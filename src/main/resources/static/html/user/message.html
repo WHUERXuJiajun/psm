@@ -38,10 +38,10 @@
 
 
 
-<div class="layui-container fly-marginTop fly-user-main">
+<div class="layui-container fly-marginTop fly-user-main" id="message">
   <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
     <li class="layui-nav-item">
-      <a href="home.html">
+      <a @click="goHome()">
         <i class="layui-icon">&#xe609;</i>
         我的主页
       </a>
@@ -77,7 +77,7 @@
   <div class="site-mobile-shade"></div>
   
   
-  <div id="message" class="fly-panel fly-panel-user" pad20>
+  <div  class="fly-panel fly-panel-user" pad20>
 	  <div class="layui-tab layui-tab-brief" lay-filter="user" id="LAY_msg" style="margin-top: 15px;">
 <!--	    <button class="layui-btn layui-btn-danger" id="LAY_delallmsg">清空全部消息</button>-->
 	    <div  id="LAY_minemsg" style="margin-top: 10px;">
@@ -117,6 +117,8 @@
 <script src="../../json/vue.min.js"></script>
 <script src="../../json/axios.min.js"></script>
 <script src="../../json/user/message.js"></script>
+<script>
+</script>
 <script>
 layui.cache.page = 'user';
 layui.cache.user = {

@@ -51,15 +51,13 @@ public class PostController {
 
 
 
-    @PreAuthorize("hasRole('user')")
     @GetMapping(value = "/getMissionsByPhone")
     @ApiOperation(
             value = "获取用户发布的任务",
             notes = "获取用户发布的任务"
     )
-    public List<MissionTable> getMissionsByPhone( HttpServletRequest request){
-        Principal principal = request.getUserPrincipal();
-        return postService.getMissionsByPhone(principal.getName());
+    public List<MissionTable> getMissionsByPhone( String phone){
+        return postService.getMissionsByPhone(phone);
     }
 /*
     @PostMapping(value = "/post2post")
