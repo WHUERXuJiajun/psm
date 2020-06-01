@@ -159,7 +159,7 @@
         <dl>
           <!--<i class="layui-icon fly-loading">&#xe63d;</i>-->
           <dd v-for="user in users">
-            <a href="../user/home.html">
+            <a @click="goHome(user)">
               <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>{{user.username}}</cite><i>{{user.score}}分</i>
             </a>
           </dd>

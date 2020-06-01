@@ -62,6 +62,10 @@ new Vue({
         goDetail:function(mission){
             window.location.href = "detail.html?mid="+mission.mid;
         },
+        goHome:function (user) {
+
+            window.location.href = "../user/home.html?phone=" + user.phone;
+        },
         plusXing:function(str, frontLen, endLen, cha) {
             let len = str.length - frontLen - endLen;
             let xing = '';
