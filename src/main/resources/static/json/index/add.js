@@ -62,6 +62,11 @@ $(document).ready(function () {
                     alert("任务发布失败");
                 }
 
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                /*错误信息处理*/
+                alert('请先登录！');
+                window.location.href="../user/login.html"
             }
         });
         return false;

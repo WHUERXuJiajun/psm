@@ -140,7 +140,7 @@ public class MissionTableServicelmpl implements MissionTableService {
         Map<String,Object> map = new HashMap<>();
         List<MissionTable> missionTables=new ArrayList<>();
         MissionTableExample missionTableExample=new MissionTableExample();
-        missionTableExample.setOrderByClause("post_time");
+        missionTableExample.setOrderByClause("post_time desc");
         missionTables=missionTableMapper.selectByExample(missionTableExample);
         if(missionTables.size()%size==0){
             map.put("pageNum",missionTables.size()/size);
@@ -165,7 +165,7 @@ public class MissionTableServicelmpl implements MissionTableService {
         Map<String,Object> map = new HashMap<>();
         List<MissionTable> missionTables=new ArrayList<>();
         MissionTableExample missionTableExample=new MissionTableExample();
-        missionTableExample.setOrderByClause("money");
+        missionTableExample.setOrderByClause("money desc");
         missionTables=missionTableMapper.selectByExample(missionTableExample);
         if(missionTables.size()%size==0){
             map.put("pageNum",missionTables.size()/size);
